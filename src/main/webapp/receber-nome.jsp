@@ -1,3 +1,4 @@
+<%@page import="java.util.TimeZone"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,5 +19,8 @@
 	<%= "Estado: " + application.getInitParameter("estado") %>
 	<p><b>Session</b></p>
 	<%="Usuário: " + session.getAttribute("usuario")%></br>
+	<p><b>Diretivas</b></p>
+	<%@page import="java.util.Date"%>
+	<%= "TimeZone: " + TimeZone.getDefault().getID() %>
 </body>
 </html>
