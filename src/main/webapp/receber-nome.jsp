@@ -24,5 +24,8 @@
 	<%= "TimeZone: " + TimeZone.getDefault().getID() %>
 	<p><b>Include</b></p>
 	<%@ include file="pagina-include.jsp" %>
+	<p><b>Tag</b></p>
+	<%@ taglib prefix="meuprefix" uri="WEB-INF/minhatag.tld"%>
+	<meuprefix:minhatag/>
 </body>
 </html>
