@@ -22,5 +22,7 @@
 	<p><b>Diretivas</b></p>
 	<%@page import="java.util.Date"%>
 	<%= "TimeZone: " + TimeZone.getDefault().getID() %>
+	<p><b>Include</b></p>
+	<%@ include file="pagina-include.jsp" %>
 </body>
 </html>
