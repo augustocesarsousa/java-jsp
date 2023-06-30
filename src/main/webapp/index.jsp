@@ -11,6 +11,7 @@
 	<h1>Hello World in JSP!</h1>
 	<%! Date date = new Date();%>
 	<p><%= "A data de hoje é: " + date %></p>
+	<p><%= "Estado: " + application.getInitParameter("estado") %></p>
 	<form action="receber-nome.jsp">
 		<input type="text" id="nome" name="nome" placeholder="Escreva seu nome aqui">
 		<button type="submit">Enviar</button>

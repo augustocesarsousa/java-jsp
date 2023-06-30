@@ -9,4 +9,8 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<param-name>estado</param-name>
+  	<param-value>São Paulo</param-value>
+  </context-param>
 </web-app>
