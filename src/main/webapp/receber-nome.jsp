@@ -14,5 +14,9 @@
 	<%="Method: " + request.getMethod()%></br>
 	<%="Local name: " + request.getLocalName()%></br>
 	<%="Local port: " + request.getLocalPort()%></br>
+	<p><b>Appication</b></p>
+	<%= "Estado: " + application.getInitParameter("estado") %>
+	<p><b>Session</b></p>
+	<%="Usuário: " + session.getAttribute("usuario")%></br>
 </body>
 </html>
