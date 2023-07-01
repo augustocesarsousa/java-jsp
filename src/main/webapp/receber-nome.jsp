@@ -1,3 +1,4 @@
+<jsp:useBean id="meuBean" class="beans.MeuBean" type="beans.MeuBean"/>
 <%@page import="java.util.TimeZone"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,23 +8,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<%="Nome recebido: " + request.getParameter("nome")%>
+<body>	
+	<p><b>Setters e Getters</b></p>
+	<jsp:setProperty property="*" name="meuBean"/>
+	<jsp:getProperty property="nome" name="meuBean"/><br/>
+	<jsp:getProperty property="email" name="meuBean"/><br/>
+	<jsp:getProperty property="telefone" name="meuBean"/><br/>
+	
 	<p><b>Objetos implícitos</b></p>
-	<%="Url: " + request.getRequestURL()%></br>
-	<%="Contex path: " + request.getContextPath()%></br>
-	<%="Method: " + request.getMethod()%></br>
-	<%="Local name: " + request.getLocalName()%></br>
-	<%="Local port: " + request.getLocalPort()%></br>
+	<%="Url: " + request.getRequestURL()%><br/>
+	<%="Contex path: " + request.getContextPath()%><br/>
+	<%="Method: " + request.getMethod()%><br/>
+	<%="Local name: " + request.getLocalName()%><br/>
+	<%="Local port: " + request.getLocalPort()%><br/>
+	
 	<p><b>Appication</b></p>
 	<%= "Estado: " + application.getInitParameter("estado") %>
+	
 	<p><b>Session</b></p>
-	<%="Usuário: " + session.getAttribute("usuario")%></br>
+	<%="Usuário: " + session.getAttribute("usuario")%><br/>
+	
 	<p><b>Diretivas</b></p>
 	<%@page import="java.util.Date"%>
 	<%= "TimeZone: " + TimeZone.getDefault().getID() %>
+	
 	<p><b>Include</b></p>
 	<%@ include file="pagina-include.jsp" %>
+	
 	<p><b>Tag</b></p>
 	<%@ taglib prefix="meuprefix" uri="WEB-INF/minhatag.tld"%>
 	<meuprefix:minhatag/>

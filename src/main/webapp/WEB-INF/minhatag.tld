@@ -6,7 +6,7 @@
 	<short-name>MinhaTag</short-name>
 	<tag>
 		<name>minhatag</name>
-		<tag-class>tag.MinhaTag</tag-class>
+		<tag-class>tags.MinhaTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 </taglib>
