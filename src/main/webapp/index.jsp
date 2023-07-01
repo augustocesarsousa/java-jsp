@@ -16,5 +16,8 @@
 		<button type="submit">Enviar</button>
 	</form>
 	<% session.setAttribute("usuario", "Augusto Cesar"); %>
+	<jsp:forward page="receber-nome.jsp">
+		<jsp:param value="Augusto" name="nome"/>
+	</jsp:forward>
 </body>
 </html>
