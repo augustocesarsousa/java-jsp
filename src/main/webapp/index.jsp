@@ -1,3 +1,5 @@
+<jsp:useBean id="meuBean" class="beans.MeuBean" type="beans.MeuBean" scope="page"/>
+
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,6 +22,7 @@
 <%-- 	<jsp:forward page="receber-nome.jsp"> --%>
 <%-- 		<jsp:param value="Augusto" name="nome"/> --%>
 <%-- 	</jsp:forward> --%>
+	<p><%= "Bean = " + meuBean.calcula(30) %></p>
 	<jsp:include page="rodape.jsp"></jsp:include>
 </body>
 </html>
