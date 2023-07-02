@@ -38,5 +38,11 @@
 	<p><b>Tag</b></p>
 	<%@ taglib prefix="meuprefix" uri="WEB-INF/minhatag.tld"%>
 	<meuprefix:minhatag/>
+	
+	<p><b>Expression language</b></p>
+	<span>Nome: ${param.nome}</span><br/>
+	<span>Email: ${param.email}</span><br/>
+	<span>Telefone: ${param.telefone}</span><br/>
+	<span>Sessão: ${sessionScope.usuario}</span><br/>
 </body>
 </html>
