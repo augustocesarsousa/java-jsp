@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Acesso negao, verifique usuário ou senha</h2>
+	<h2>Acesso negado, verifique usuário ou senha</h2>
 </body>
 </html>
