@@ -53,6 +53,8 @@
 		</label><br/>
 		<button type="submit">Entrar</button>
 	</form>
+	
+	<!-- Banco de dados -->
 
 </body>
 </html>
