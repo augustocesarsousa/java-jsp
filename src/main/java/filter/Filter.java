@@ -2,6 +2,7 @@ package filter;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -30,6 +31,7 @@ public class Filter implements javax.servlet.Filter{
 			conn.commit();
 		} catch (Exception e) {
 			try {
+				e.printStackTrace();
 				conn.rollback();				
 			} catch (Exception e2) {
 				e2.printStackTrace();
@@ -40,6 +42,11 @@ public class Filter implements javax.servlet.Filter{
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		conn = SingleConnection.getConnection();	
+		try {
+			conn.setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
