@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
-	<h2>Acesso liberado!</h2>
+	<h1>Página Home</h1>
+	<a href="cadastro-usuario.jsp">Cadastro de usuário</a>
 </body>
 </html>

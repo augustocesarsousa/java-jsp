@@ -1,10 +1,18 @@
 package beans;
 
-public class Login {
+public class Usuario {
 	
 	private String login;
 	private String senha;
 	
+	public Usuario() {
+	}
+	
+	public Usuario(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
+	}
+
 	public boolean acesso(String login, String senha) {
 		if(login.equalsIgnoreCase("augusto") && senha.equals("123")) {
 			return true;

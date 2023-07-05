@@ -1,4 +1,4 @@
-<jsp:useBean id="loginBean" class="beans.Login" type="beans.Login" scope="page"/>
+<jsp:useBean id="loginBean" class="beans.Usuario" type="beans.Usuario" scope="page"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -44,6 +44,7 @@
 <%-- 	</c:forTokens> --%>
 <!-- 	<br/> -->
 <!-- 	<br/> -->
+	<h1>Login</h1>
 	<form action="LoginServlet" method="post">
 		<label>Login: 
 			<input type="text" id="login" name="login" placeholder="Login">		
