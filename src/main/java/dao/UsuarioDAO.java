@@ -40,6 +40,19 @@ public class UsuarioDAO {
 		return false;
 	}
 	
+	public Usuario consultaUsuario(String id) throws Exception {
+		String sql = "SELECT * FROM usuario WHERE id = " + id;;
+		
+		PreparedStatement preparedStatement = conn.prepareStatement(sql);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		if(resultSet.next()) {
+			return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+		}
+		
+		return null;
+	}
+	
 	public List<Usuario> listar() throws Exception {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
@@ -73,6 +86,29 @@ public class UsuarioDAO {
 			}
 		}
 		
+		return false;
+	}
+	
+	public boolean update(Usuario usuario) {
+		try {
+			String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = ?";
+			
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, usuario.getLogin());
+			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.setInt(3, usuario.getId());
+			preparedStatement.executeUpdate();	
+			
+			conn.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}	
 		return false;
 	}
 }

@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 //import beans.Login;
 import dao.LoginDAO;
+import dao.UsuarioDAO;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	UsuarioDAO usuarioDAO = new UsuarioDAO();	
 	private LoginDAO loginDAO = new LoginDAO();
     
     public LoginServlet() {
@@ -34,8 +36,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			if(loginDAO.validarLogin(login, senha)) {
-				RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
-				dispacher.forward(request, response);
+				listar(request, response);
 			} else {
 				RequestDispatcher dispacher = request.getRequestDispatcher("acesso-negado.jsp");
 				dispacher.forward(request, response);
@@ -43,6 +44,16 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
+			request.setAttribute("usuarios", usuarioDAO.listar());
+			dispacher.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}				
 	}
 
 }

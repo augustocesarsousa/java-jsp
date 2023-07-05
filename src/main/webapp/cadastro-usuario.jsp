@@ -17,22 +17,24 @@
 			<input type="password" id="senha" name="senha" placeholder="Senha">
 		</label><br/>
 		<button type="submit">Cadastrar</button>
+		<a href="UsuarioServlet?acao=listar">Cancelar</a>
 	</form>	
-	<table>
-		<tr>
-			<td>ID</td>
-			<td>Usuário</td>
-			<td></td>
-		</tr>
-		<c:forEach items="${usuarios}" var="usuario">
-			<tr>
-				<td><c:out value="${usuario.id}"></c:out></td>
-				<td><c:out value="${usuario.login}"></c:out></td>
-				<td>
-					<a href="UsuarioServlet?acao=delete&id=${usuario.id}">Excluir</a>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+<!-- 	<table> -->
+<!-- 		<tr> -->
+<!-- 			<td>ID</td> -->
+<!-- 			<td>Usuário</td> -->
+<!-- 			<td></td> -->
+<!-- 		</tr> -->
+<%-- 		<c:forEach items="${usuarios}" var="usuario"> --%>
+<!-- 			<tr> -->
+<%-- 				<td><c:out value="${usuario.id}"></c:out></td> --%>
+<%-- 				<td><c:out value="${usuario.login}"></c:out></td> --%>
+<!-- 				<td> -->
+<%-- 					<a href="UsuarioServlet?acao=delete&id=${usuario.id}">Excluir</a> --%>
+<%-- 					<a href="UsuarioServlet?acao=editar&id=${usuario.id}">Excluir</a> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<%-- 		</c:forEach> --%>
+<!-- 	</table> -->
 </body>
 </html>

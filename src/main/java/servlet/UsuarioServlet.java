@@ -26,28 +26,68 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acao = request.getParameter("acao");
 		String id = request.getParameter("id");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		
+		System.out.println("acao = " + acao + " id = " + id + " login = " + login + " senha = " + senha);
+		
+		if(acao.equalsIgnoreCase("listar")) {
+			listar(request, response);	
+		}
 		
 		if(acao.equalsIgnoreCase("delete")) {
 			if(usuarioDAO.deletar(id)) {
 				listar(request, response);				
 			}
 		}
+		
+		if(acao.equalsIgnoreCase("editar")) {
+			try {
+				Usuario usuario = usuarioDAO.consultaUsuario(id);
+				try {
+					RequestDispatcher dispacher = request.getRequestDispatcher("editar-usuario.jsp");
+					request.setAttribute("usuario", usuario);
+					dispacher.forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}		
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+//		if(acao.equalsIgnoreCase("update")) {
+//			try {
+//				if(usuarioDAO.update(new Usuario(Integer.parseInt(id), login, senha))) {
+//					listar(request, response);				
+//				}	
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String id = request.getParameter("id");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		Usuario usuario = new Usuario(login, senha);
 		
-		if(usuarioDAO.cadastrar(usuario)) {
-			listar(request, response);		
+		if(id == null || id.isEmpty()) {
+			if(usuarioDAO.cadastrar(new Usuario(login, senha))) {
+				listar(request, response);		
+			}			
+		} else {
+			if(usuarioDAO.update(new Usuario(Integer.parseInt(id), login, senha))) {
+				listar(request, response);				
+			}
 		}
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
+			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
 			request.setAttribute("usuarios", usuarioDAO.listar());
 			dispacher.forward(request, response);
 		} catch (Exception e) {
