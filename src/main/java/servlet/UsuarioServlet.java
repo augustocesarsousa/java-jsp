@@ -23,19 +23,35 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = request.getParameter("acao");
+		String id = request.getParameter("id");
+		
+		if(acao.equalsIgnoreCase("delete")) {
+			if(usuarioDAO.deletar(id)) {
+				listar(request, response);				
+			}
+		}
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		Usuario usuario = new Usuario(login, senha);
 		
 		if(usuarioDAO.cadastrar(usuario)) {
-			try {
-				RequestDispatcher dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
-				request.setAttribute("usuarios", usuarioDAO.listar());
-				dispacher.forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}			
+			listar(request, response);		
 		}
+	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			RequestDispatcher dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
+			request.setAttribute("usuarios", usuarioDAO.listar());
+			dispacher.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}				
 	}
 }

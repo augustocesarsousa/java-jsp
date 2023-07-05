@@ -22,11 +22,15 @@
 		<tr>
 			<td>ID</td>
 			<td>Usuário</td>
+			<td></td>
 		</tr>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
+				<td>
+					<a href="UsuarioServlet?acao=delete&id=${usuario.id}">Excluir</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

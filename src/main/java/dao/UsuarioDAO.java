@@ -55,4 +55,24 @@ public class UsuarioDAO {
 		
 		return usuarios;
 	}
+	
+	public boolean deletar(String id) {
+		String sql = "DELETE FROM usuario WHERE id = " + id;
+		
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.execute();
+			conn.commit();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
 }
