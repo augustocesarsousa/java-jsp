@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Login;
+//import beans.Login;
+import dao.LoginDAO;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private LoginDAO loginDAO = new LoginDAO();
     
     public LoginServlet() {
         super();
@@ -24,17 +27,21 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Login loginBean = new Login();
+//		Login loginBean = new Login();
 		
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
-		if(loginBean.acesso(login, senha)) {
-			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
-			dispacher.forward(request, response);
-		} else {
-			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-negado.jsp");
-			dispacher.forward(request, response);
+		try {
+			if(loginDAO.validarLogin(login, senha)) {
+				RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
+				dispacher.forward(request, response);
+			} else {
+				RequestDispatcher dispacher = request.getRequestDispatcher("acesso-negado.jsp");
+				dispacher.forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
