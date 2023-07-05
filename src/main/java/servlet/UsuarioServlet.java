@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Usuario;
 import dao.UsuarioDAO;
 
-@WebServlet("/CadastroUsuarioServlet")
+@WebServlet("/UsuarioServlet")
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	UsuarioDAO cadastroUsuarioDAO = new UsuarioDAO();
+	UsuarioDAO usuarioDAO = new UsuarioDAO();
 	
 	public UsuarioServlet() {
 		super();
@@ -28,9 +28,14 @@ public class UsuarioServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		Usuario usuario = new Usuario(login, senha);
 		
-		if(cadastroUsuarioDAO.cadastrar(usuario)) {
-			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
-			dispacher.forward(request, response);			
+		if(usuarioDAO.cadastrar(usuario)) {
+			try {
+				RequestDispatcher dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
+				request.setAttribute("usuarios", usuarioDAO.listar());
+				dispacher.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
 		}
 	}
 }

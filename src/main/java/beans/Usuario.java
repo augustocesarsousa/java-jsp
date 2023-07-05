@@ -2,6 +2,7 @@ package beans;
 
 public class Usuario {
 	
+	private Integer id;
 	private String login;
 	private String senha;
 	
@@ -9,6 +10,12 @@ public class Usuario {
 	}
 	
 	public Usuario(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
+	}	
+
+	public Usuario(Integer id, String login, String senha) {
+		this.id = id;
 		this.login = login;
 		this.senha = senha;
 	}
@@ -19,8 +26,16 @@ public class Usuario {
 		}
 		
 		return false;
-	}
+	}	
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getLogin() {
 		return login;
 	}

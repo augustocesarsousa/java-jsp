@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,5 +18,17 @@
 		</label><br/>
 		<button type="submit">Cadastrar</button>
 	</form>	
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>Usuário</td>
+		</tr>
+		<c:forEach items="${usuarios}" var="usuario">
+			<tr>
+				<td><c:out value="${usuario.id}"></c:out></td>
+				<td><c:out value="${usuario.login}"></c:out></td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>
