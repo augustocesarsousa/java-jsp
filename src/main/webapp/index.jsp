@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>	
 	<!-- 	Criando variável -->
@@ -44,15 +45,19 @@
 <%-- 	</c:forTokens> --%>
 <!-- 	<br/> -->
 <!-- 	<br/> -->
-	<h1>Login</h1>
-	<form action="LoginServlet" method="post">
-		<label>Login: 
-			<input type="text" id="login" name="login" placeholder="Login">		
-		</label><br/>	
-		<label>Senha:
-			<input type="password" id="senha" name="senha" placeholder="Senha">
-		</label><br/>
-		<button type="submit">Entrar</button>
-	</form>
+	<div class="container">
+		<h1>Login</h1>
+		<form action="LoginServlet" method="post">
+			<div class="input-container">
+				<label for="login">Usuário:</label>
+				<input type="text" id="login" name="login">
+			</div>
+			<div class="input-container">
+				<label for="senha">Senha:</label>
+				<input type="password" id="senha" name="senha">		
+			</div>
+			<button type="submit" class="btn">Entrar</button>
+		</form>	
+	</div>
 </body>
 </html>

@@ -11,7 +11,7 @@
 	<h1>Edição de Usuário</h1>
 	<form action="UsuarioServlet" method="post">
 		<label>ID: 
-			<input type="text" id="id" name="id" value="${usuario.id}" disabled>		
+			<input type="text" id="id" name="id" value="${usuario.id}" readonly>		
 		</label><br/>	
 		<label>Login: 
 			<input type="text" id="login" name="login" value="${usuario.login}">		

@@ -26,10 +26,6 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acao = request.getParameter("acao");
 		String id = request.getParameter("id");
-		String login = request.getParameter("login");
-		String senha = request.getParameter("senha");
-		
-		System.out.println("acao = " + acao + " id = " + id + " login = " + login + " senha = " + senha);
 		
 		if(acao.equalsIgnoreCase("listar")) {
 			listar(request, response);	
@@ -55,16 +51,6 @@ public class UsuarioServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-//		if(acao.equalsIgnoreCase("update")) {
-//			try {
-//				if(usuarioDAO.update(new Usuario(Integer.parseInt(id), login, senha))) {
-//					listar(request, response);				
-//				}	
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
 	}
 	
 	@Override
@@ -75,10 +61,12 @@ public class UsuarioServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		
 		if(id == null || id.isEmpty()) {
+			System.out.println("Insert");
 			if(usuarioDAO.cadastrar(new Usuario(login, senha))) {
 				listar(request, response);		
 			}			
 		} else {
+			System.out.println("Update");
 			if(usuarioDAO.update(new Usuario(Integer.parseInt(id), login, senha))) {
 				listar(request, response);				
 			}
