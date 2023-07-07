@@ -61,12 +61,10 @@ public class UsuarioServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		
 		if(id == null || id.isEmpty()) {
-			System.out.println("Insert");
 			if(usuarioDAO.cadastrar(new Usuario(login, senha))) {
 				listar(request, response);		
 			}			
 		} else {
-			System.out.println("Update");
 			if(usuarioDAO.update(new Usuario(Integer.parseInt(id), login, senha))) {
 				listar(request, response);				
 			}

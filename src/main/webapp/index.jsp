@@ -56,7 +56,7 @@
 				<label for="senha">Senha:</label>
 				<input type="password" id="senha" name="senha">		
 			</div>
-			<button type="submit" class="btn">Entrar</button>
+			<button type="submit" class="btn btn-blue">Entrar</button>
 		</form>	
 	</div>
 </body>
