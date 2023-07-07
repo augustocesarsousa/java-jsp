@@ -4,21 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Cadastro de Usuário</title>
+	<meta charset="UTF-8">
+	<title>Cadastro de Usuário</title>
+	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
-	<h1>Cadastro de Usuário</h1>
-	<form action="UsuarioServlet" method="post">
-		<label>Login: 
-			<input type="text" id="login" name="login" placeholder="Login">		
-		</label><br/>	
-		<label>Senha:
-			<input type="password" id="senha" name="senha" placeholder="Senha">
-		</label><br/>
-		<button type="submit">Cadastrar</button>
-		<a href="UsuarioServlet?acao=listar">Cancelar</a>
-	</form>	
+	<div class="container">
+		<h1>Cadastro de Usuário</h1>
+		<form action="UsuarioServlet" method="post">
+			<div class="input-container">
+				<label for="login">Usuário:</label>
+				<input type="text" id="login" name="login">
+			</div>
+			<div class="input-container">
+				<label for="senha">Senha:</label>
+				<input type="password" id="senha" name="senha">		
+			</div>
+			<div class="btn-content">
+				<button type="submit" class="btn btn-middle btn-blue">Cadastrar</button>
+				<a href="UsuarioServlet?acao=listar" class="btn btn-middle btn-red">Cancelar</a>			
+			</div>
+		</form>	
+	</div>
 <!-- 	<table> -->
 <!-- 		<tr> -->
 <!-- 			<td>ID</td> -->

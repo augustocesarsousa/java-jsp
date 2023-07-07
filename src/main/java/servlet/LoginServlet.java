@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
 			if(loginDAO.validarLogin(login, senha)) {
 				listar(request, response);
 			} else {
-				RequestDispatcher dispacher = request.getRequestDispatcher("acesso-negado.jsp");
+				RequestDispatcher dispacher = request.getRequestDispatcher("index.jsp");
+				request.setAttribute("invalido", true);
 				dispacher.forward(request, response);
 			}
 		} catch (Exception e) {

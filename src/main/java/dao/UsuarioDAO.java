@@ -56,7 +56,7 @@ public class UsuarioDAO {
 	public List<Usuario> listar() throws Exception {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
-		String sql = "SELECT * FROM usuario";
+		String sql = "SELECT * FROM usuario ORDER BY id";
 		
 		PreparedStatement preparedStatement = conn.prepareStatement(sql);
 		ResultSet resultSet = preparedStatement.executeQuery();

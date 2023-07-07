@@ -19,18 +19,29 @@ body {
 a {
 	text-decoration: none;
 	color: black;
-	padding: 5px;
+}
+
+small {
+	color: red;
+	margin-top: 5px;
 }
 
 .container {
 	background-color: white;
 	width: 300px;
-	min-height: 265px;
+	min-height: 270px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	box-shadow: -8px 10px 14px -4px rgba(0,0,0,0.75);
 	padding: 5px;
+}
+
+.container form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .input-container {
@@ -43,7 +54,7 @@ a {
 }
 
 .input-container input {
-	width: 170px;
+	width: 180px;
 	height: 20px;
 	border: none;
 	border-bottom: 2px solid black;
@@ -54,6 +65,14 @@ a {
 	outline: none;
 }
 
+.btn-content {
+	display: flex;
+}
+
+.btn-content button {
+	margin-right: 5px;
+}
+
 .btn {
 	width: 170px;
 	height: 40px;
@@ -61,19 +80,20 @@ a {
 	cursor: pointer;
 	font-size: 16px;
 	transition: .5s;
-	display: inline-block;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 4px;
 }
 
 .btn-small {
-	width: 50px;
-	height: 20px;
+	width: 60px;
+	height: 30px;
 }
 
 .btn-middle {
-	width: 80px;
-	height: 20px;
+	width: 90px;
+	height: 30px;
 }
 
 .btn-blue {
@@ -121,6 +141,10 @@ table {
 .table-content thead tr {
     background-color: #808080;
     font-weight: bold;
+}
+
+.table-content thead tr th:last-child a {
+    margin: auto;
 }
 
 .table-content th,

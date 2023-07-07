@@ -57,6 +57,9 @@
 				<input type="password" id="senha" name="senha">		
 			</div>
 			<button type="submit" class="btn btn-blue">Entrar</button>
+			<c:if test="${invalido == true}">
+				<small>Usuário ou senha inválido!</small>
+			</c:if>
 		</form>	
 	</div>
 </body>
