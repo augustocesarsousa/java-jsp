@@ -14,11 +14,21 @@
 		<form action="UsuarioServlet" method="post">
 			<div class="input-container">
 				<label for="login">Usuário:</label>
-				<input type="text" id="login" name="login">
+				<c:if test="${usuario.login != null}">
+					<input type="text" id="login" name="login" value="${usuario.login}">				
+				</c:if>
+				<c:if test="${usuario.login == null}">
+					<input type="text" id="login" name="login">				
+				</c:if>
 			</div>
 			<div class="input-container">
 				<label for="senha">Senha:</label>
-				<input type="password" id="senha" name="senha">		
+				<c:if test="${usuario.senha != null}">
+					<input type="password" id="senha" name="senha" value="${usuario.senha}">				
+				</c:if>
+				<c:if test="${usuario.senha == null}">
+					<input type="password" id="senha" name="senha">				
+				</c:if>		
 			</div>
 			<div class="btn-content">
 				<button type="submit" class="btn btn-middle btn-blue">Cadastrar</button>

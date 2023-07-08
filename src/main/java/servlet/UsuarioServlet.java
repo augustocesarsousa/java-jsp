@@ -49,31 +49,36 @@ public class UsuarioServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		Usuario usuario;
+		String dadosValidados = validarDados(request.getParameter("login"), request.getParameter("senha"));
+		Usuario usuario = new Usuario(
+				request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : null, 
+				request.getParameter("login"), 
+				request.getParameter("senha"));
 		
-		if(request.getParameter("id") != null) {
-			usuario = new Usuario(Integer.parseInt(request.getParameter("id")), request.getParameter("login"), request.getParameter("senha"));			
-		} else {
-			usuario = new Usuario(request.getParameter("login"), request.getParameter("senha"));
-		}
-		
-		Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
-		
-		if(usuarioLogin != null && !usuario.equals(usuarioLogin)) {
+		if(dadosValidados != null) {
 			if(usuario.getId() == null) {
-				redirecionar(request, response, "cadastrar", null, true, "Usuário já cadastrado!");
-				
+				redirecionar(request, response, "cadastrar", usuario, true, dadosValidados);				
 			} else {
-				redirecionar(request, response, "editar", usuario, true, "Usuário já cadastrado!");			
-			}				
-		} else {				
-			if(usuario.getId() == null) {
-				usuarioDAO.cadastrar(usuario);
-				redirecionar(request, response, "listar", null, false, null);
-			} else {
-				usuarioDAO.update(usuario);
-				redirecionar(request, response, "listar", null, false, null);
-			}				
+				redirecionar(request, response, "editar", usuario, true, dadosValidados);			
+			}			
+		} else {			
+			Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
+			
+			if(usuarioLogin != null && !usuario.equals(usuarioLogin)) {
+				if(usuario.getId() == null) {
+					redirecionar(request, response, "cadastrar", usuario, true, "Usuário já cadastrado!");					
+				} else {
+					redirecionar(request, response, "editar", usuario, true, "Usuário já cadastrado!");			
+				}				
+			} else {				
+				if(usuario.getId() == null) {
+					usuarioDAO.cadastrar(usuario);
+					redirecionar(request, response, "listar", null, false, null);
+				} else {
+					usuarioDAO.update(usuario);
+					redirecionar(request, response, "listar", null, false, null);
+				}				
+			}			
 		}
 	}
 	
@@ -94,6 +99,7 @@ public class UsuarioServlet extends HttpServlet {
 				}
 				case "cadastrar": {
 					dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
+					request.setAttribute("usuario", usuario);
 					break;
 				}
 				default:
@@ -111,5 +117,15 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private String validarDados(String login, String senha) {				
+		if(login == null || login.replace(" ", "").length() < 4) {
+			return "Usuário precisa ter pelo menos 4 dígitos";
+		}				
+		if(senha == null || senha.replace(" ", "").length() < 4) {
+			return "Senha precisa ter pelo menos 4 dígitos";
+		}
+		return null;
 	}
 }
