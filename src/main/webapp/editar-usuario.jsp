@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<h1>Edição de Usuário</h1>
-		<form action="UsuarioServlet" method="post">
+		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false">
 			<div class="input-container">
 				<label for="login">ID:</label>
 				<input type="text" id="id" name="id" value="${usuario.id}" readonly>
@@ -29,9 +29,26 @@
 				<a href="UsuarioServlet?acao=listar" class="btn btn-middle btn-red">Cancelar</a>
 			</div>
 		</form>
-		<c:if test="${erro == true}">
-			<small>${mensagem}</small>
-		</c:if>
+		<small id="mensagem-erro">${mensagem}</small>
 	</div>
+	<script type="text/javascript">		
+		function validarForm() {
+			const inputLogin = document.getElementById('login');
+			const inputSenha = document.getElementById('senha');
+			const smallErro = document.getElementById('mensagem-erro');
+			
+			if(inputLogin.value.replace(' ', '') === '' || inputLogin.value.length < 4) {
+				smallErro.innerText = 'Usuário precisa ter pelo menos 4 dígitos';
+				return false;
+			}
+			
+			if(inputSenha.value.replace(' ', '') === '' || inputSenha.value.length < 4) {
+				smallErro.innerText = 'Senha precisa ter pelo menos 4 dígitos';
+				return false;
+			}
+			
+			return true;
+		}
+	</script>
 </body>
 </html>

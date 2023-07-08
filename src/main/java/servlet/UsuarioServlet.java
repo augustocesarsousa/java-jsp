@@ -48,37 +48,24 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		String dadosValidados = validarDados(request.getParameter("login"), request.getParameter("senha"));
-		Usuario usuario = new Usuario(
-				request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : null, 
-				request.getParameter("login"), 
-				request.getParameter("senha"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : null;
+		String login = request.getParameter("login").replace(" ", "");
+		String senha = request.getParameter("senha").replace(" ", "");
+		
+		Usuario usuario = new Usuario(id, login, senha);
+		String acao = usuario.getId() == null ? "cadastrar" : "editar";
+		String dadosValidados = validarDados(usuario);
 		
 		if(dadosValidados != null) {
-			if(usuario.getId() == null) {
-				redirecionar(request, response, "cadastrar", usuario, true, dadosValidados);				
+			redirecionar(request, response, acao, usuario, true, dadosValidados);		
+		} else {				
+			if(acao.equals("cadastrar")) {
+				usuarioDAO.cadastrar(usuario);
 			} else {
-				redirecionar(request, response, "editar", usuario, true, dadosValidados);			
-			}			
-		} else {			
-			Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
-			
-			if(usuarioLogin != null && !usuario.equals(usuarioLogin)) {
-				if(usuario.getId() == null) {
-					redirecionar(request, response, "cadastrar", usuario, true, "Usuário já cadastrado!");					
-				} else {
-					redirecionar(request, response, "editar", usuario, true, "Usuário já cadastrado!");			
-				}				
-			} else {				
-				if(usuario.getId() == null) {
-					usuarioDAO.cadastrar(usuario);
-					redirecionar(request, response, "listar", null, false, null);
-				} else {
-					usuarioDAO.update(usuario);
-					redirecionar(request, response, "listar", null, false, null);
-				}				
-			}			
+				usuarioDAO.update(usuario);
+			}
+			redirecionar(request, response, "listar", null, false, null);
 		}
 	}
 	
@@ -119,12 +106,18 @@ public class UsuarioServlet extends HttpServlet {
 		}
 	}
 	
-	private String validarDados(String login, String senha) {				
-		if(login == null || login.replace(" ", "").length() < 4) {
+	private String validarDados(Usuario usuario) {				
+		if(usuario.getLogin() == null || usuario.getLogin().length() < 4) {
 			return "Usuário precisa ter pelo menos 4 dígitos";
 		}				
-		if(senha == null || senha.replace(" ", "").length() < 4) {
+		if(usuario.getSenha() == null || usuario.getSenha().length() < 4) {
 			return "Senha precisa ter pelo menos 4 dígitos";
+		}
+		
+		Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
+		
+		if(usuarioLogin != null && !usuario.equals(usuarioLogin)) {
+			return "Usuário já cadastrado!";
 		}
 		return null;
 	}

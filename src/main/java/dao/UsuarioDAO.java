@@ -40,9 +40,10 @@ public class UsuarioDAO {
 	
 	public Usuario consultaUsuarioPorId(String id) {
 		try {
-			String sql = "SELECT * FROM usuario WHERE id = " + id;;
+			String sql = "SELECT * FROM usuario WHERE id = ?";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setInt(1, Integer.parseInt(id));
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
@@ -56,10 +57,11 @@ public class UsuarioDAO {
 	
 	public Usuario consultaUsuarioPorLogin(String login) {		
 		try {
-			String sql = "SELECT * FROM usuario WHERE login = '" + login + "'";	
+			String sql = "SELECT * FROM usuario WHERE login = ?";	
 			
 			PreparedStatement preparedStatement;
 			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, login);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
@@ -91,10 +93,11 @@ public class UsuarioDAO {
 	}
 	
 	public void deletar(String id) {
-		String sql = "DELETE FROM usuario WHERE id = " + id;
+		String sql = "DELETE FROM usuario WHERE id = ?";
 		
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setInt(1, Integer.parseInt(id));
 			preparedStatement.execute();
 			conn.commit();
 		} catch (SQLException e) {
