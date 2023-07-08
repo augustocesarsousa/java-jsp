@@ -39,7 +39,8 @@ public class LoginServlet extends HttpServlet {
 				listar(request, response);
 			} else {
 				RequestDispatcher dispacher = request.getRequestDispatcher("index.jsp");
-				request.setAttribute("invalido", true);
+				request.setAttribute("erro", true);
+				request.setAttribute("mensagem", "Usuário ou senha inválido!");
 				dispacher.forward(request, response);
 			}
 		} catch (Exception e) {

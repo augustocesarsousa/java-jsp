@@ -29,6 +29,9 @@
 				<a href="UsuarioServlet?acao=listar" class="btn btn-middle btn-red">Cancelar</a>
 			</div>
 		</form>
+		<c:if test="${erro == true}">
+			<small>${mensagem}</small>
+		</c:if>
 	</div>
 </body>
 </html>

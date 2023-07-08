@@ -18,7 +18,7 @@ public class UsuarioDAO {
 		conn = SingleConnection.getConnection();
 	}
 	
-	public boolean cadastrar(Usuario usuario) {
+	public void cadastrar(Usuario usuario) {
 		try {
 			String sql = "INSERT INTO usuario (login, senha) VALUES (?, ?)";
 			
@@ -28,7 +28,6 @@ public class UsuarioDAO {
 			preparedStatement.execute();	
 			
 			conn.commit();
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
@@ -36,47 +35,68 @@ public class UsuarioDAO {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-		}	
-		return false;
+		}
 	}
 	
-	public Usuario consultaUsuario(String id) throws Exception {
-		String sql = "SELECT * FROM usuario WHERE id = " + id;;
-		
-		PreparedStatement preparedStatement = conn.prepareStatement(sql);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		
-		if(resultSet.next()) {
-			return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
-		}
-		
+	public Usuario consultaUsuarioPorId(String id) {
+		try {
+			String sql = "SELECT * FROM usuario WHERE id = " + id;;
+			
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 		return null;
 	}
 	
-	public List<Usuario> listar() throws Exception {
+	public Usuario consultaUsuarioPorLogin(String login) {		
+		try {
+			String sql = "SELECT * FROM usuario WHERE login = '" + login + "'";	
+			
+			PreparedStatement preparedStatement;
+			preparedStatement = conn.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha")); 
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<Usuario> listar() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		String sql = "SELECT * FROM usuario ORDER BY id";
-		
-		PreparedStatement preparedStatement = conn.prepareStatement(sql);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		
-		while(resultSet.next()) {
-			Usuario usuario = new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
-			usuarios.add(usuario);
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Usuario usuario = new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+				usuarios.add(usuario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return usuarios;
 	}
 	
-	public boolean deletar(String id) {
+	public void deletar(String id) {
 		String sql = "DELETE FROM usuario WHERE id = " + id;
 		
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.execute();
 			conn.commit();
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -85,11 +105,9 @@ public class UsuarioDAO {
 				e1.printStackTrace();
 			}
 		}
-		
-		return false;
 	}
 	
-	public boolean update(Usuario usuario) {
+	public void update(Usuario usuario) {
 		try {
 			String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = ?";
 			
@@ -100,7 +118,6 @@ public class UsuarioDAO {
 			preparedStatement.executeUpdate();	
 			
 			conn.commit();
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
@@ -109,6 +126,5 @@ public class UsuarioDAO {
 				e1.printStackTrace();
 			}
 		}	
-		return false;
 	}
 }

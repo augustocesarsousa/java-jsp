@@ -24,7 +24,10 @@
 				<button type="submit" class="btn btn-middle btn-blue">Cadastrar</button>
 				<a href="UsuarioServlet?acao=listar" class="btn btn-middle btn-red">Cancelar</a>			
 			</div>
-		</form>	
+		</form>
+		<c:if test="${erro == true}">
+			<small>${mensagem}</small>
+		</c:if>
 	</div>
 <!-- 	<table> -->
 <!-- 		<tr> -->
