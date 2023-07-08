@@ -7,9 +7,12 @@
 	<meta charset="UTF-8">
 	<title>Lista de usuários</title>
 	<link rel="stylesheet" href="resources/css/style.css">
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 	<div class="container">
+		<a href="index.jsp" title="Sair" id="btn-sair"><i class="fa fa-xmark"></i></a>
 		<h1>Lista de usuários</h1>		
 		<div id="table-container">
 			<table class="table-content">
@@ -18,7 +21,7 @@
 						<th>ID</th>
 						<th>Usuário</th>
 						<th colspan="2">
-							<a href="cadastro-usuario.jsp" class="btn btn-middle btn-blue">Cadastrar</a>
+							<a href="cadastro-usuario.jsp" class="btn btn-middle btn-green">Cadastrar</a>
 						</th>			
 					</tr>
 				</thead>
@@ -28,10 +31,10 @@
 							<td><c:out value="${usuario.id}"></c:out></td>
 							<td><c:out value="${usuario.login}"></c:out></td>
 							<td>
-								<a href="UsuarioServlet?acao=editar&id=${usuario.id}" class="btn btn-small btn-yellow">Editar</a>
+								<a href="UsuarioServlet?acao=editar&id=${usuario.id}" class="btn btn-square btn-yellow" title="Editar"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
 							</td>
 							<td>
-								<a href="UsuarioServlet?acao=delete&id=${usuario.id}" class="btn btn-small btn-red">Excluir</a>
+								<a href="UsuarioServlet?acao=delete&id=${usuario.id}" class="btn btn-square btn-red" title="Excluir"><i class="fa fa-trash fa-lg"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

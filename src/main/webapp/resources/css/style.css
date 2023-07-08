@@ -27,6 +27,7 @@ small {
 }
 
 .container {
+	position: relative;
 	background-color: white;
 	width: auto;
 	min-width: 300px;
@@ -67,6 +68,20 @@ small {
 	outline: none;
 }
 
+#btn-sair {
+	width: 20px;
+	height: 20px;
+	background-color:  #e22424;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	transition: .5s;
+}
+
 .btn-content {
 	display: flex;
 }
@@ -96,6 +111,19 @@ small {
 .btn-middle {
 	width: 90px;
 	height: 30px;
+}
+
+.btn-square {
+	width: 30px;
+	height: 30px;
+}
+
+.btn-green {
+	background-color: #25c013;
+}
+
+.btn-green:hover {
+	background-color: #209d11;
 }
 
 .btn-blue {
