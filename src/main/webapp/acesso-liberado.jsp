@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
-	<div  class="container">
+	<div class="container">
 		<h1>Lista de usuários</h1>		
 		<div id="table-container">
 			<table class="table-content">

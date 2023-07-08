@@ -28,7 +28,9 @@ small {
 
 .container {
 	background-color: white;
-	width: 300px;
+	width: auto;
+	min-width: 300px;
+	max-width: 900px;
 	min-height: 270px;
 	display: flex;
 	flex-direction: column;
@@ -126,16 +128,12 @@ table {
 }
 
 #table-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-x: auto;
+    width: 100%;
 }
 
 .table-content {
-    min-width: 295px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
 }
 
 .table-content thead tr {
@@ -150,6 +148,10 @@ table {
 .table-content th,
 .table-content td {
     padding: 10px;
+}
+
+.table-content tbody tr:nth-of-type(odd) {
+    background-color: #fff;
 }
 
 .table-content tbody tr:nth-of-type(even) {
