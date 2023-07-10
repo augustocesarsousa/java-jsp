@@ -48,11 +48,11 @@
 	<div class="container">
 		<h1>Login</h1>
 		<form action="LoginServlet" method="post">
-			<div class="input-container">
+			<div class="input-content">
 				<label for="login">Usuário:</label>
 				<input type="text" id="login" name="login">
 			</div>
-			<div class="input-container">
+			<div class="input-content">
 				<label for="senha">Senha:</label>
 				<input type="password" id="senha" name="senha">		
 			</div>

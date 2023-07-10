@@ -20,11 +20,21 @@ public class UsuarioDAO {
 	
 	public void cadastrar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha) VALUES (?, ?)";
+			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.setString(3, usuario.getNome());
+			preparedStatement.setString(4, usuario.getSobrenome());
+			preparedStatement.setString(5, usuario.getEmail());
+			preparedStatement.setString(6, usuario.getTelefone());
+			preparedStatement.setString(7, usuario.getLogradouro());
+			preparedStatement.setInt(8, usuario.getNumero());
+			preparedStatement.setString(9, usuario.getBairro());
+			preparedStatement.setString(10, usuario.getCidade());
+			preparedStatement.setString(11, usuario.getEstado());
+			preparedStatement.setString(12, usuario.getCep());
 			preparedStatement.execute();	
 			
 			conn.commit();
@@ -47,7 +57,20 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+				return new Usuario(
+						resultSet.getLong("id"), 
+						resultSet.getString("login"), 
+						resultSet.getString("senha"),
+						resultSet.getString("nome"),
+						resultSet.getString("sobrenome"),
+						resultSet.getString("email"),
+						resultSet.getString("telefone"),
+						resultSet.getString("logradouro"),
+						resultSet.getInt("numero"),
+						resultSet.getString("bairro"),
+						resultSet.getString("cidade"),
+						resultSet.getString("estado"),
+						resultSet.getString("cep"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,7 +88,20 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				return new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha")); 
+				return new Usuario(
+						resultSet.getLong("id"), 
+						resultSet.getString("login"), 
+						resultSet.getString("senha"),
+						resultSet.getString("nome"),
+						resultSet.getString("sobrenome"),
+						resultSet.getString("email"),
+						resultSet.getString("telefone"),
+						resultSet.getString("logradouro"),
+						resultSet.getInt("numero"),
+						resultSet.getString("bairro"),
+						resultSet.getString("cidade"),
+						resultSet.getString("estado"),
+						resultSet.getString("cep")); 
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +118,20 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				Usuario usuario = new Usuario(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+				Usuario usuario = new Usuario(
+						resultSet.getLong("id"), 
+						resultSet.getString("login"), 
+						resultSet.getString("senha"),
+						resultSet.getString("nome"),
+						resultSet.getString("sobrenome"),
+						resultSet.getString("email"),
+						resultSet.getString("telefone"),
+						resultSet.getString("logradouro"),
+						resultSet.getInt("numero"),
+						resultSet.getString("bairro"),
+						resultSet.getString("cidade"),
+						resultSet.getString("estado"),
+						resultSet.getString("cep"));
 				usuarios.add(usuario);
 			}
 		} catch (SQLException e) {
@@ -112,12 +161,22 @@ public class UsuarioDAO {
 	
 	public void update(Usuario usuario) {
 		try {
-			String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = ?";
+			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, sobrenome = ?, email = ?, telefone = ?, logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE id = ?";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
-			preparedStatement.setInt(3, usuario.getId());
+			preparedStatement.setString(3, usuario.getNome());
+			preparedStatement.setString(4, usuario.getSobrenome());
+			preparedStatement.setString(5, usuario.getEmail());
+			preparedStatement.setString(6, usuario.getTelefone());
+			preparedStatement.setString(7, usuario.getLogradouro());
+			preparedStatement.setInt(8, usuario.getNumero());
+			preparedStatement.setString(9, usuario.getBairro());
+			preparedStatement.setString(10, usuario.getCidade());
+			preparedStatement.setString(11, usuario.getEstado());
+			preparedStatement.setString(12, usuario.getCep());
+			preparedStatement.setLong(13, usuario.getId());
 			preparedStatement.executeUpdate();	
 			
 			conn.commit();

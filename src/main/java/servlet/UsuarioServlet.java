@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,11 +50,22 @@ public class UsuarioServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : null;
+		Long id = request.getParameter("id") != null ? Long.parseLong(request.getParameter("id")) : null;
 		String login = request.getParameter("login").replace(" ", "");
 		String senha = request.getParameter("senha").replace(" ", "");
+		String nome = request.getParameter("nome").replace(" ", "");
+		String sobrenome = request.getParameter("sobrenome").replace(" ", "");
+		String email = request.getParameter("email");
+		String telefone = request.getParameter("telefone");
+		String logradouro = request.getParameter("logradouro");
+		Integer numero = Integer.parseInt(request.getParameter("numero").replace(" ", ""));
+		String bairro = request.getParameter("bairro");
+		String cidade = request.getParameter("cidade");
+		String estado = request.getParameter("estado");
+		String cep = request.getParameter("cep").replace(" ", "");
 		
-		Usuario usuario = new Usuario(id, login, senha);
+		Usuario usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep);
+//		System.out.println(usuario);
 		String acao = usuario.getId() == null ? "cadastrar" : "editar";
 		String dadosValidados = validarDados(usuario);
 		
@@ -112,6 +124,33 @@ public class UsuarioServlet extends HttpServlet {
 		}				
 		if(usuario.getSenha() == null || usuario.getSenha().length() < 4) {
 			return "Senha precisa ter pelo menos 4 dígitos";
+		}				
+		if(usuario.getNome() == null || usuario.getNome().isEmpty()) {
+			return "Informe o nome do usuário";
+		}				
+		if(!Pattern.compile("^(.+)@(.+)$").matcher(usuario.getEmail()).matches()) {
+			return "Email inválido";
+		}				
+		if(!Pattern.compile("^(\\d{10,11})$").matcher(usuario.getTelefone()).matches()) {
+			return "Telefone inválido";
+		}				
+		if(usuario.getLogradouro() == null || usuario.getLogradouro().isEmpty()) {
+			return "Logradouro inválido";
+		}				
+		if(usuario.getNumero() == null || usuario.getNumero() < 0) {
+			return "Numero inválido";
+		}				
+		if(usuario.getBairro() == null || usuario.getBairro().isEmpty()) {
+			return "Bairro inválido";
+		}				
+		if(usuario.getCidade() == null || usuario.getCidade().isEmpty()) {
+			return "Cidade inválido";
+		}				
+		if(usuario.getEstado() == null || usuario.getEstado().isEmpty()) {
+			return "Estado inválido";
+		}				
+		if(usuario.getCep() == null || usuario.getCep().isEmpty()) {
+			return "Cep inválido";
 		}
 		
 		Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());

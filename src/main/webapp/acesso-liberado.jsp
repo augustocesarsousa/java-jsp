@@ -20,6 +20,16 @@
 					<tr>
 						<th>ID</th>
 						<th>Usuário</th>
+						<th>Nome</th>
+						<th>Sobrenome</th>
+						<th>Email</th>
+						<th>Telefone</th>
+						<th>Logradouro</th>
+						<th>Numero</th>
+						<th>Bairro</th>
+						<th>Cidade</th>
+						<th>Estado</th>
+						<th>CEP</th>
 						<th colspan="2">
 							<a href="cadastro-usuario.jsp" class="btn btn-middle btn-green">Cadastrar</a>
 						</th>			
@@ -30,6 +40,16 @@
 						<tr>
 							<td><c:out value="${usuario.id}"></c:out></td>
 							<td><c:out value="${usuario.login}"></c:out></td>
+							<td><c:out value="${usuario.nome}"></c:out></td>
+							<td><c:out value="${usuario.sobrenome}"></c:out></td>
+							<td><c:out value="${usuario.email}"></c:out></td>
+							<td><c:out value="${usuario.telefone}"></c:out></td>
+							<td><c:out value="${usuario.logradouro}"></c:out></td>
+							<td><c:out value="${usuario.numero}"></c:out></td>
+							<td><c:out value="${usuario.bairro}"></c:out></td>
+							<td><c:out value="${usuario.cidade}"></c:out></td>
+							<td><c:out value="${usuario.estado}"></c:out></td>
+							<td><c:out value="${usuario.cep}"></c:out></td>
 							<td>
 								<a href="UsuarioServlet?acao=editar&id=${usuario.id}" class="btn btn-square btn-yellow" title="Editar"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
 							</td>
