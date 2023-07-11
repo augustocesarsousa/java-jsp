@@ -17,12 +17,13 @@ const smallErro = document.getElementById('mensagem-erro');
 let cepResult;
 
 inputCep.addEventListener('focusout', () => {
-	if(validaCEP(inputCep.value)){
+	if(validarCEP(inputCep.value)){
 		fetch(`https://viacep.com.br/ws/${inputCep.value}/json/`)
 			.then(response => response.json())
 			.then(result => {
+				console.log(result.erro)
 				if(result.erro === true) {
-					smallErro.innerText = 'CEO não encontrado'
+					smallErro.innerText = 'CEP não encontrado'
 				}else{
 					console.log(result.logradouro);
 					inputLogradouro.value = result.logradouro;
@@ -36,61 +37,91 @@ inputCep.addEventListener('focusout', () => {
 
 	
 function validarForm() {
-	
-	if(inputLogin.value.replace(' ', '') === '' || inputLogin.value.length < 4) {
-		smallErro.innerText = 'Usuário precisa ter pelo menos 4 dígitos';
+	if(!validarLogin(inputLogin.value)){
 		return false;
 	}
-	
-	if(inputSenha.value.replace(' ', '') === '' || inputSenha.value.length < 4) {
-		smallErro.innerText = 'Senha precisa ter pelo menos 4 dígitos';
+	if(!validarSenha(inputSenha.value)){
 		return false;
 	}
-	
-	if(inputNome.value.replace(' ', '') === '' || inputNome.value === null) {
-		smallErro.innerText = 'Nome inválido';
+	if(!validarNome(inputNome.value)){
 		return false;
 	}
-	
-	if(validaTelefone(inputTelefone.value)) {
-		smallErro.innerText = 'Telefone inválido';
+	if(!validarEmail(inputEmail.value)){
 		return false;
 	}
-	
-	if(inputLogradouro.value.replace(' ', '') === '' || inputLogradouro.value === null) {
-		smallErro.innerText = 'Logradouro inválido';
+	if(!validarTelefone(inputTelefone.value)){
 		return false;
 	}
-	
-	if(inputNumero.value < 0) {
-		smallErro.innerText = 'Numero inválido';
+	if(!validarCEP(inputCep.value)){
 		return false;
 	}
-	
-	if(inputBairro.value.replace(' ', '') === '' || inputBairro.value === null) {
-		smallErro.innerText = 'Bairro inválido';
+	if(!validarLogradouro(inputLogradouro.value)){
 		return false;
 	}
-	
-	if(inputCidade.value.replace(' ', '') === '' || inputCidade.value === null) {
-		smallErro.innerText = 'Cidade inválido';
+	if(!validarNumero(inputNumero.value)){
 		return false;
 	}
-	
-	if(inputEstado.value.replace(' ', '') === '' || inputEstado.value === null) {
-		smallErro.innerText = 'Estado inválido';
+	if(!validarBairro(inputBairro.value)){
 		return false;
 	}
-	
-	if(inputCep.value.replace(' ', '') === '' || inputCep.value === null) {
-		smallErro.innerText = 'CEP inválido';
+	if(!validarCidade(inputCidade.value)){
 		return false;
 	}
-	
+	if(!validarEstado(inputEstado.value)){
+		return false;
+	}
+		
 	return true;
 }
 
-function validaCEP(cep) {
+function validarLogin(login) {
+	if(login.replace(' ', '') === '' || login.length < 4) {
+		smallErro.innerText = 'Usuário precisa ter pelo menos 4 dígitos';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarSenha(senha){
+	if(senha.replace(' ', '') === '' || senha.length < 4) {
+		smallErro.innerText = 'Senha precisa ter pelo menos 4 dígitos';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarNome(nome){
+	if(nome.replace(' ', '') === '' || nome === null || nome === undefined) {
+		smallErro.innerText = 'Informe um nome';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarTelefone(telefone) {
+    let regex = /^[0-9]{10,11}$/;
+    if(!regex.test(telefone)){
+		smallErro.innerText = 'Telefone inválido';
+		return false;		
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarEmail(email) {
+	let regex = /^(.+)@(.+)$/;
+    if(!regex.test(email)){
+		smallErro.innerText = 'Email inválido';
+		return false;		
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarCEP(cep) {
 	if(cep.length !== 8) {
 		smallErro.innerText = 'CEP inválido';
 		return false;
@@ -99,7 +130,47 @@ function validaCEP(cep) {
 	return true;
 }
 
-function validaTelefone(telefone) {
-    let regex = '^(\\d{10,11})$';
-    return regex.test(telefone);
+function validarLogradouro(logradouro) {
+	if(logradouro.replace(' ', '') === '' || logradouro === null || logradouro === undefined) {
+		smallErro.innerText = 'Logradouro inválido';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarNumero(numero) {
+	if(numero < 0) {
+		smallErro.innerText = 'Numero inválido';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarBairro(bairro) {
+	if(bairro.replace(' ', '') === '' || bairro === null || bairro === undefined) {
+		smallErro.innerText = 'Bairro inválido';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarCidade(cidade) {
+	if(cidade.replace(' ', '') === '' || cidade === null || cidade === undefined) {
+		smallErro.innerText = 'Cidade inválido';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
+}
+
+function validarEstado(estado) {
+	if(estado.replace(' ', '') === '' || estado === null || estado === undefined) {
+		smallErro.innerText = 'Estado inválido';
+		return false;
+	}
+	smallErro.innerText = '';
+	return true;
 }
