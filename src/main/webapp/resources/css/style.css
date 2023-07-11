@@ -188,6 +188,10 @@ table {
 		padding: 10px;
 	}
 	
+	.input-content input {
+		width: 250px;
+	}
+	
 	.input-left-content {
 		margin-right: 10px;
 	}

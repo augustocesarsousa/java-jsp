@@ -58,11 +58,11 @@ public class UsuarioServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
 		String logradouro = request.getParameter("logradouro");
-		Integer numero = Integer.parseInt(request.getParameter("numero").replace(" ", ""));
+		Integer numero = Integer.parseInt(request.getParameter("numero").equals("") ? "-1" : request.getParameter("numero"));
 		String bairro = request.getParameter("bairro");
 		String cidade = request.getParameter("cidade");
 		String estado = request.getParameter("estado");
-		String cep = request.getParameter("cep").replace(" ", "");
+		String cep = request.getParameter("cep");
 		
 		Usuario usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep);
 //		System.out.println(usuario);
