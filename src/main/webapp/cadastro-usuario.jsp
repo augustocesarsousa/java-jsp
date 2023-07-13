@@ -70,7 +70,7 @@
 					</div>
 					<div class="input-content">
 						<label for="foto">Foto:</label>
-						<input type="file" id="input-foto" name="foto">
+						<input type="file" id="input-foto" name="foto" placeholder="png, jpg - 256bk">
 					</div>
 				</div>
 				<div class="input-right-content">				
