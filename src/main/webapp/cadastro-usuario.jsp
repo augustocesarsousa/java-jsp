@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<h1>Cadastro de Usuário</h1>
-		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false">
+		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false" enctype="multipart/form-data">
 			<div class="input-container">
 				<div class="input-left-content">
 					<div class="input-content">
@@ -62,11 +62,15 @@
 					<div class="input-content">
 						<label for="telefone">Telefone:</label>
 						<c:if test="${usuario.telefone != null}">
-							<input type="text" id="telefone" name="telefone" value="${usuario.telefone}">				
+							<input type="number" id="telefone" name="telefone" value="${usuario.telefone}">				
 						</c:if>
 						<c:if test="${usuario.telefone == null}">
-							<input type="text" id="telefone" name="telefone">				
+							<input type="number" id="telefone" name="telefone">				
 						</c:if>
+					</div>
+					<div class="input-content">
+						<label for="foto">Foto:</label>
+						<input type="file" id="input-foto" name="foto">
 					</div>
 				</div>
 				<div class="input-right-content">				

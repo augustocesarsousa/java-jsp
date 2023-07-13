@@ -1,19 +1,27 @@
 package servlet;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import beans.Usuario;
 import dao.UsuarioDAO;
 
 @WebServlet("/UsuarioServlet")
+@MultipartConfig
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -65,19 +73,30 @@ public class UsuarioServlet extends HttpServlet {
 		String cep = request.getParameter("cep");
 		
 		Usuario usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep);
-//		System.out.println(usuario);
 		String acao = usuario.getId() == null ? "cadastrar" : "editar";
 		String dadosValidados = validarDados(usuario);
 		
-		if(dadosValidados != null) {
-			redirecionar(request, response, acao, usuario, true, dadosValidados);		
-		} else {				
-			if(acao.equals("cadastrar")) {
-				usuarioDAO.cadastrar(usuario);
-			} else {
-				usuarioDAO.update(usuario);
+		try {
+			if(ServletFileUpload.isMultipartContent(request)) {
+				Part fotoUsuario = request.getPart("foto");
+				new Base64();
+				String fotoBase64 = Base64.encodeBase64String(converteStreamParaByte(fotoUsuario.getInputStream()));
+				System.out.println(fotoBase64);
+				System.out.println(fotoUsuario.getContentType());
 			}
-			redirecionar(request, response, "listar", null, false, null);
+			
+			if (dadosValidados != null) {
+				redirecionar(request, response, acao, usuario, true, dadosValidados);
+			} else {
+				if (acao.equals("cadastrar")) {
+					//usuarioDAO.cadastrar(usuario);
+				} else {
+					usuarioDAO.update(usuario);
+				}
+				redirecionar(request, response, "listar", null, false, null);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -159,5 +178,15 @@ public class UsuarioServlet extends HttpServlet {
 			return "Usuário já cadastrado!";
 		}
 		return null;
+	}
+	
+	private byte[] converteStreamParaByte(InputStream imagem) throws Exception {
+		ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+		int reads = imagem.read();
+		while (reads != -1) {
+			byteArray.write(reads);
+			reads = imagem.read();
+		}
+		return byteArray.toByteArray();
 	}
 }

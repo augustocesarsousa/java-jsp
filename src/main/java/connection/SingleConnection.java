@@ -14,7 +14,7 @@ public class SingleConnection {
 		conectar();
 	}
 
-	public SingleConnection() {
+	private SingleConnection() {
 		conectar();
 	}	
 	

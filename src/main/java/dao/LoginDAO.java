@@ -15,8 +15,10 @@ public class LoginDAO {
 	}
 	
 	public boolean validarLogin(String login, String senha) throws Exception {
-		String sql = "SELECT * FROM usuario WHERE login = '" + login + "' AND senha  = '" + senha + "'";
+		String sql = "SELECT * FROM usuario WHERE login = ? AND senha  = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(sql);
+		preparedStatement.setString(1, login);
+		preparedStatement.setString(2, senha);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		
 		if(resultSet.next()) {

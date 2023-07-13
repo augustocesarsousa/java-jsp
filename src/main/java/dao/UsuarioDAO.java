@@ -20,7 +20,8 @@ public class UsuarioDAO {
 	
 	public void cadastrar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
@@ -161,7 +162,8 @@ public class UsuarioDAO {
 	
 	public void update(Usuario usuario) {
 		try {
-			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, sobrenome = ?, email = ?, telefone = ?, logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE id = ?";
+			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, sobrenome = ?, email = ?, telefone = ?, "
+					+ "logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE id = ?";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());

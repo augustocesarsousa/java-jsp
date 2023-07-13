@@ -17,7 +17,7 @@ import dao.UsuarioDAO;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	UsuarioDAO usuarioDAO = new UsuarioDAO();	
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();	
 	private LoginDAO loginDAO = new LoginDAO();
     
     public LoginServlet() {
@@ -29,8 +29,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Login loginBean = new Login();
-		
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
