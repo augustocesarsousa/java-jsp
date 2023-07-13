@@ -19,6 +19,7 @@
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>Foto</th>
 						<th>Usuário</th>
 						<th>Nome</th>
 						<th>Sobrenome</th>
@@ -39,6 +40,7 @@
 					<c:forEach items="${usuarios}" var="usuario">
 						<tr>
 							<td><c:out value="${usuario.id}"></c:out></td>
+							<td><img alt="Foto do usuário" title="Foto" src="<c:out value="${usuario.fotoBase64}"></c:out>" width="32px" height="32px"></td>
 							<td><c:out value="${usuario.login}"></c:out></td>
 							<td><c:out value="${usuario.nome}"></c:out></td>
 							<td><c:out value="${usuario.sobrenome}"></c:out></td>
