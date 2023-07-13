@@ -71,25 +71,30 @@ public class UsuarioServlet extends HttpServlet {
 		String cidade = request.getParameter("cidade");
 		String estado = request.getParameter("estado");
 		String cep = request.getParameter("cep");
-		
-		Usuario usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep);
-		String acao = usuario.getId() == null ? "cadastrar" : "editar";
-		String dadosValidados = validarDados(usuario);
+		String fotoBase64 = null;
+		String fotoContentType = null;		
+		Usuario usuario = null;
+		String acao = null;
+		String dadosValidados = null;
 		
 		try {
 			if(ServletFileUpload.isMultipartContent(request)) {
 				Part fotoUsuario = request.getPart("foto");
 				new Base64();
-				String fotoBase64 = Base64.encodeBase64String(converteStreamParaByte(fotoUsuario.getInputStream()));
-				System.out.println(fotoBase64);
-				System.out.println(fotoUsuario.getContentType());
-			}
+				fotoBase64 = Base64.encodeBase64String(converteStreamParaByte(fotoUsuario.getInputStream()));
+				fotoContentType = fotoUsuario.getContentType();
+			}			
+
+			usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotoBase64, fotoContentType);
+			System.out.println(usuario);
+			acao = usuario.getId() == null ? "cadastrar" : "editar";
+			dadosValidados = validarDados(usuario);
 			
 			if (dadosValidados != null) {
 				redirecionar(request, response, acao, usuario, true, dadosValidados);
 			} else {
 				if (acao.equals("cadastrar")) {
-					//usuarioDAO.cadastrar(usuario);
+					usuarioDAO.cadastrar(usuario);
 				} else {
 					usuarioDAO.update(usuario);
 				}

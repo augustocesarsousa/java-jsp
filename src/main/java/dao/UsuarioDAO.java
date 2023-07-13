@@ -20,8 +20,8 @@ public class UsuarioDAO {
 	
 	public void cadastrar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotobase64, fotocontenttype) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
@@ -36,6 +36,8 @@ public class UsuarioDAO {
 			preparedStatement.setString(10, usuario.getCidade());
 			preparedStatement.setString(11, usuario.getEstado());
 			preparedStatement.setString(12, usuario.getCep());
+			preparedStatement.setString(13, usuario.getFotoBase64());
+			preparedStatement.setString(14, usuario.getFotoContentType());
 			preparedStatement.execute();	
 			
 			conn.commit();
@@ -71,7 +73,9 @@ public class UsuarioDAO {
 						resultSet.getString("bairro"),
 						resultSet.getString("cidade"),
 						resultSet.getString("estado"),
-						resultSet.getString("cep"));
+						resultSet.getString("cep"),
+						resultSet.getString("fotobase64"),
+						resultSet.getString("fotocontenttype"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,7 +106,9 @@ public class UsuarioDAO {
 						resultSet.getString("bairro"),
 						resultSet.getString("cidade"),
 						resultSet.getString("estado"),
-						resultSet.getString("cep")); 
+						resultSet.getString("cep"),
+						resultSet.getString("fotobase64"),
+						resultSet.getString("fotocontenttype")); 
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,7 +138,9 @@ public class UsuarioDAO {
 						resultSet.getString("bairro"),
 						resultSet.getString("cidade"),
 						resultSet.getString("estado"),
-						resultSet.getString("cep"));
+						resultSet.getString("cep"),
+						resultSet.getString("fotobase64"),
+						resultSet.getString("fotocontenttype"));
 				usuarios.add(usuario);
 			}
 		} catch (SQLException e) {
@@ -163,7 +171,7 @@ public class UsuarioDAO {
 	public void update(Usuario usuario) {
 		try {
 			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, sobrenome = ?, email = ?, telefone = ?, "
-					+ "logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE id = ?";
+					+ "logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ?, fotobase64 = ?, fotocontenttype = ? WHERE id = ?";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
@@ -178,7 +186,9 @@ public class UsuarioDAO {
 			preparedStatement.setString(10, usuario.getCidade());
 			preparedStatement.setString(11, usuario.getEstado());
 			preparedStatement.setString(12, usuario.getCep());
-			preparedStatement.setLong(13, usuario.getId());
+			preparedStatement.setString(13, usuario.getFotoBase64());
+			preparedStatement.setString(14, usuario.getFotoContentType());
+			preparedStatement.setLong(15, usuario.getId());
 			preparedStatement.executeUpdate();	
 			
 			conn.commit();

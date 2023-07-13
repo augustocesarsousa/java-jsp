@@ -17,23 +17,14 @@ public class Usuario {
 	private String cidade;
 	private String estado;
 	private String cep;
+	private String fotoBase64;
+	private String fotoContentType;
 	
 	public Usuario() {
 	}
 	
-	public Usuario(String login, String senha) {
-		this.login = login;
-		this.senha = senha;
-	}	
-
-	public Usuario(Long id, String login, String senha) {
-		this.id = id;
-		this.login = login;
-		this.senha = senha;
-	}
-	
 	public Usuario(Long id, String login, String senha, String nome, String sobrenome, String email, String telefone,
-			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep) {
+			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep, String fotoBase64, String fotoContentType) {
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
@@ -47,6 +38,8 @@ public class Usuario {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+		this.fotoBase64 = fotoBase64;
+		this.fotoContentType = fotoContentType;
 	}
 
 	public Long getId() {
@@ -148,13 +141,30 @@ public class Usuario {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}	
+
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+
+	public String getFotoContentType() {
+		return fotoContentType;
+	}
+
+	public void setFotoContentType(String fotoContentType) {
+		this.fotoContentType = fotoContentType;
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", nome=" + nome + ", sobrenome="
 				+ sobrenome + ", email=" + email + ", telefone=" + telefone + ", logradouro=" + logradouro + ", numero="
-				+ numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + "]";
+				+ numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep
+				+ ", fotoBase64=" + fotoBase64 + ", fotoContentType=" + fotoContentType + "]";
 	}
 
 	@Override

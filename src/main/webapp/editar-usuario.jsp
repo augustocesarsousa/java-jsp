@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<h1>Edição de Usuário</h1>
-		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false">
+		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false" enctype="multipart/form-data">
 			<div class="input-container">
 				<div class="input-left-content">
 					<div class="input-content">
@@ -67,6 +67,10 @@
 					<div class="input-content">
 						<label for="estado">Estado:</label>
 						<input type="text" id="estado" name="estado" value="${usuario.estado}">
+					</div>
+					<div class="input-content">
+						<label for="foto">Foto:</label>
+						<input type="file" id="input-foto" name="foto">
 					</div>
 				</div>
 			</div>
