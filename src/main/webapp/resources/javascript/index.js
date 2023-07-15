@@ -13,6 +13,7 @@ const inputBairro = document.getElementById('bairro');
 const inputCidade = document.getElementById('cidade');
 const inputEstado = document.getElementById('estado');
 const inputCep = document.getElementById('cep');
+const inputCurriculo = document.getElementById('curriculo');
 const smallErro = document.getElementById('mensagem-erro');
 let cepResult;
 
@@ -21,11 +22,9 @@ inputCep.addEventListener('focusout', () => {
 		fetch(`https://viacep.com.br/ws/${inputCep.value}/json/`)
 			.then(response => response.json())
 			.then(result => {
-				console.log(result.erro)
 				if(result.erro === true) {
 					smallErro.innerText = 'CEP não encontrado'
 				}else{
-					console.log(result.logradouro);
 					inputLogradouro.value = result.logradouro;
 					inputBairro.value = result.bairro;
 					inputCidade.value = result.localidade;
@@ -173,4 +172,12 @@ function validarEstado(estado) {
 	}
 	smallErro.innerText = '';
 	return true;
+}
+
+function validarCurriculo() {
+	smallErro.innerText = '';
+	if(inputCurriculo.files[0].type !== 'application/pdf') {
+		smallErro.innerText = 'Tipo de arquivo inválido, selecione um arquivo pdf';
+		inputCurriculo.value = '';
+	}
 }

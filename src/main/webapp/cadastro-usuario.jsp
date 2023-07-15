@@ -130,7 +130,7 @@
 					</div>
 					<div class="input-arquivo">
 						<label for="curriculo">Curriculo:</label>
-						<input type="file" name="curriculo">
+						<input type="file" id="curriculo" name="curriculo" onchange="validarCurriculo()">
 					</div>
 				</div>
 			</div>

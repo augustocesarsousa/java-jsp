@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
 	<div class="container">
-		<h1>Edição de Usuário</h1>
+		<h1>EdiÃ§Ã£o de UsuÃ¡rio</h1>
 		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false" enctype="multipart/form-data">
 			<div class="input-container">
 				<div class="input-left-content">
@@ -19,7 +19,7 @@
 						<input type="text" id="id" name="id" value="${usuario.id}" readonly>
 					</div>
 					<div class="input-content">
-						<label for="login">Usuário:</label>
+						<label for="login">UsuÃ¡rio:</label>
 						<input type="text" id="login" name="login" value="${usuario.login}">
 					</div>	
 					<div class="input-content">
@@ -74,7 +74,7 @@
 					</div>
 					<div class="input-arquivo">
 						<label for="curriculo">Curriculo:</label>
-						<input type="file" name="curriculo">
+						<input type="file" id="curriculo" name="curriculo" onchange="validarCurriculo()">
 					</div>
 				</div>
 			</div>
