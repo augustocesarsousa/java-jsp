@@ -42,6 +42,10 @@
 						<label for="telefone">Telefone:</label>
 						<input type="text" id="telefone" name="telefone" value="${usuario.telefone}">
 					</div>
+					<div class="input-arquivo">
+						<label for="foto">Foto:</label>
+						<input type="file" name="foto">
+					</div>
 				</div>
 				<div class="input-right-content">
 					<div class="input-content">
@@ -68,9 +72,9 @@
 						<label for="estado">Estado:</label>
 						<input type="text" id="estado" name="estado" value="${usuario.estado}">
 					</div>
-					<div class="input-content">
-						<label for="foto">Foto:</label>
-						<input type="file" id="input-foto" name="foto">
+					<div class="input-arquivo">
+						<label for="curriculo">Curriculo:</label>
+						<input type="file" name="curriculo">
 					</div>
 				</div>
 			</div>

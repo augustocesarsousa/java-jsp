@@ -68,9 +68,9 @@
 							<input type="number" id="telefone" name="telefone">				
 						</c:if>
 					</div>
-					<div class="input-content">
+					<div  class="input-arquivo">
 						<label for="foto">Foto:</label>
-						<input type="file" id="input-foto" name="foto" placeholder="png, jpg - 256bk">
+						<input type="file" name="foto" placeholder="png, jpg - 256bk">
 					</div>
 				</div>
 				<div class="input-right-content">				
@@ -127,6 +127,10 @@
 						<c:if test="${usuario.estado == null}">
 							<input type="text" id="estado" name="estado">				
 						</c:if>
+					</div>
+					<div class="input-arquivo">
+						<label for="curriculo">Curriculo:</label>
+						<input type="file" name="curriculo">
 					</div>
 				</div>
 			</div>

@@ -23,6 +23,7 @@
 						<th>Usuário</th>
 						<th>Nome</th>
 						<th>Email</th>
+						<th>Curriculo</th>
 						<th colspan="2">
 							<a href="cadastro-usuario.jsp" class="btn btn-middle btn-green">Cadastrar</a>
 						</th>			
@@ -32,15 +33,18 @@
 					<c:forEach items="${usuarios}" var="usuario">
 						<tr>
 							<td><c:out value="${usuario.id}"></c:out></td>
-							<td><a href="UsuarioServlet?acao=download&id=${usuario.id}" title="Download"><img alt="Foto do usuário" src="<c:out value="${usuario.fotoBase64}"></c:out>" width="32px" height="32px"></a></td>
+							<td><a href="UsuarioServlet?acao=download&tipo=foto&id=${usuario.id}" title="Download da foto"><img alt="Foto do usuário" src="<c:out value="${usuario.fotoBase64}"></c:out>" width="32px" height="32px"></a></td>
 							<td><c:out value="${usuario.login}"></c:out></td>
 							<td><c:out value="${usuario.nome}"></c:out></td>
 							<td><c:out value="${usuario.email}"></c:out></td>
 							<td>
-								<a href="UsuarioServlet?acao=editar&id=${usuario.id}" class="btn btn-square btn-yellow" title="Editar"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
+								<a href="UsuarioServlet?acao=download&tipo=curriculo&id=${usuario.id}" class="btn btn-square" title="Download do curriculo"><i class="fa-solid fa-file-arrow-down fa-xl"></i></a>
 							</td>
 							<td>
-								<a href="UsuarioServlet?acao=delete&id=${usuario.id}" class="btn btn-square btn-red" title="Excluir"><i class="fa fa-trash fa-lg"></i></a>
+								<a href="UsuarioServlet?acao=editar&id=${usuario.id}" class="btn btn-square" title="Editar"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
+							</td>
+							<td>
+								<a href="UsuarioServlet?acao=delete&id=${usuario.id}" class="btn btn-square" title="Excluir"><i class="fa fa-trash fa-lg"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

@@ -18,12 +18,13 @@ public class Usuario {
 	private String estado;
 	private String cep;
 	private String fotoBase64;
+	private String curriculoBase64;
 	
 	public Usuario() {
 	}
 	
 	public Usuario(Long id, String login, String senha, String nome, String sobrenome, String email, String telefone,
-			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep, String fotoBase64) {
+			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep, String fotoBase64, String curriculoBase64) {
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
@@ -38,6 +39,7 @@ public class Usuario {
 		this.estado = estado;
 		this.cep = cep;
 		this.fotoBase64 = fotoBase64;
+		this.curriculoBase64 = curriculoBase64;
 	}
 
 	public Long getId() {
@@ -147,6 +149,14 @@ public class Usuario {
 
 	public void setFotoBase64(String fotoBase64) {
 		this.fotoBase64 = fotoBase64;
+	}
+	
+	public String getCurriculoBase64() {
+		return curriculoBase64;
+	}
+	
+	public void setCurriculoBase64(String curriculoBase64) {
+		this.curriculoBase64 = curriculoBase64;
 	}
 
 	@Override

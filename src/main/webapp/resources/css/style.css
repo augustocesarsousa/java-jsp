@@ -42,12 +42,12 @@ small {
 	align-items: center;
 }
 
-.input-content {
+.input-content, .input-arquivo {
 	display: flex;
 	flex-direction: column;
 }
 
-.input-content label {
+.input-content label, .input-arquivo label {
 	margin-bottom: 5px;
 }
 
@@ -63,7 +63,7 @@ small {
 	outline: none;
 }
 
-#input-foto {
+.input-arquivo input {
 	border: none;	
 	height: 25px;
 }
