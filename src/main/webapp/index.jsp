@@ -47,7 +47,7 @@
 <!-- 	<br/> -->
 	<div class="container">
 		<h1>Login</h1>
-		<form action="LoginServlet" method="post">
+		<form action="LoginServlet" method="post" onsubmit="return validarForm() ? true : false">
 			<div class="input-content">
 				<label for="login">Usuário:</label>
 				<input type="text" id="login" name="login">
@@ -57,10 +57,9 @@
 				<input type="password" id="senha" name="senha">		
 			</div>
 			<button type="submit" class="btn btn-blue">Entrar</button>
-			<c:if test="${erro == true}">
-				<small>${mensagem}</small>
-			</c:if>
 		</form>	
+		<small id="mensagem-erro">${mensagem}</small>
 	</div>
+	<script type="text/javascript" src="resources/javascript/login.js"></script>
 </body>
 </html>

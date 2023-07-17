@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if (dadosValidados == null) {
 			if (loginDAO.validarLogin(login, senha)) {
-				redirecionar(request, response, "liberar", null, null);
+				redirecionar(request, response, "liberar", false, null);
 			} else {
 				redirecionar(request, response, "bloquear", true, "Usuário ou senha inválido!");				
 			}
