@@ -21,7 +21,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 import beans.Usuario;
 import dao.UsuarioDAO;
-import utils.DefaultUserImage;
 
 @WebServlet("/UsuarioServlet")
 @MultipartConfig
@@ -106,8 +105,6 @@ public class UsuarioServlet extends HttpServlet {
 					fotoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(converterStreamParaByte(arquivo.getInputStream()));					
 				} else if (id != null){
 					fotoBase64 = usuarioDAO.consultaFoto(id);						
-				} else {
-					fotoBase64 = DefaultUserImage.getImage();
 				}
 				
 				arquivo = request.getPart("curriculo");

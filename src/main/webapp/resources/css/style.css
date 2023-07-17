@@ -187,6 +187,12 @@ table {
     background-color: #e6e6fa;
 }
 
+.table-content tbody tr td:nth-child(6),
+.table-content tbody tr td:nth-child(6) a {
+	text-align: center;
+	margin: auto;
+}
+
 @media(min-width: 992px) {
 	.input-container {
 		display: flex;
