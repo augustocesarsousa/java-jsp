@@ -29,31 +29,60 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		String senha = request.getParameter("senha");
+		String login = request.getParameter("login").trim();
+		String senha = request.getParameter("senha").trim();
+		String dadosValidados = validarDados(login, senha);
 		
-		try {
-			if(loginDAO.validarLogin(login, senha)) {
-				listar(request, response);
+		if (dadosValidados == null) {
+			if (loginDAO.validarLogin(login, senha)) {
+				redirecionar(request, response, "liberar", null, null);
 			} else {
-				RequestDispatcher dispacher = request.getRequestDispatcher("index.jsp");
-				request.setAttribute("erro", true);
-				request.setAttribute("mensagem", "Usuário ou senha inválido!");
-				dispacher.forward(request, response);
+				redirecionar(request, response, "bloquear", true, "Usuário ou senha inválido!");				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			redirecionar(request, response, "bloquear", true, dadosValidados);	
 		}
 	}
 	
-	private void listar(HttpServletRequest request, HttpServletResponse response) {
+	private String validarDados(String login, String senha) {
+		if(login == null || login.isEmpty()) {
+			return "Informe um usuário";
+		}
+		if(senha == null || senha.isEmpty()) {
+			return "Informe uma senha";
+		}
+		return null;
+	}
+	
+	private void redirecionar(HttpServletRequest request, HttpServletResponse response, String acao, Boolean erro, String mensagem) {
 		try {
-			RequestDispatcher dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
-			request.setAttribute("usuarios", usuarioDAO.listar());
+			RequestDispatcher dispacher;
+			
+			switch (acao) {
+				case "bloquear": {
+					dispacher = request.getRequestDispatcher("index.jsp");
+					break;
+				}
+				case "liberar": {
+					dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
+					request.setAttribute("usuarios", usuarioDAO.listar());
+					break;
+				}
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + acao);
+			}
+			
+			if(erro) {
+				request.setAttribute("erro", true);
+				request.setAttribute("mensagem", mensagem);
+			}		
+		
 			dispacher.forward(request, response);
-		} catch (Exception e) {
+		} catch (ServletException e) {	
 			e.printStackTrace();
-		}				
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
