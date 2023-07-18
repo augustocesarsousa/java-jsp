@@ -206,6 +206,12 @@ public class UsuarioServlet extends HttpServlet {
 		if(usuario.getCep() == null || usuario.getCep().isEmpty()) {
 			return "Cep inválido";
 		}
+		if(usuario.getFotoBase64() != null) {
+			String type = usuario.getFotoBase64().split("[/;]")[1];
+			if(!type.equalsIgnoreCase("jpeg") && !type.equalsIgnoreCase("jpg") && !type.equalsIgnoreCase("png")) {
+				return "Foto deve ser em formatos JPEG, JPG, PNG";
+			}			
+		}
 		if(usuario.getCurriculoBase64() != null) {
 			String type = usuario.getCurriculoBase64().split("[/;]")[1];
 			if(!type.equalsIgnoreCase("pdf")) {
