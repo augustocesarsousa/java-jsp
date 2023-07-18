@@ -206,6 +206,12 @@ public class UsuarioServlet extends HttpServlet {
 		if(usuario.getCep() == null || usuario.getCep().isEmpty()) {
 			return "Cep inválido";
 		}
+		if(usuario.getCurriculoBase64() != null) {
+			String type = usuario.getCurriculoBase64().split("[/;]")[1];
+			if(!type.equalsIgnoreCase("pdf")) {
+				return "Currículo deve ser em formato PDF";
+			}			
+		}
 		
 		Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
 		
