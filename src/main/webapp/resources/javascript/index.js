@@ -13,6 +13,7 @@ const inputBairro = document.getElementById('bairro');
 const inputCidade = document.getElementById('cidade');
 const inputEstado = document.getElementById('estado');
 const inputCep = document.getElementById('cep');
+const inputFoto = document.getElementById('foto');
 const inputCurriculo = document.getElementById('curriculo');
 const smallErro = document.getElementById('mensagem-erro');
 let cepResult;
@@ -174,10 +175,20 @@ function validarEstado(estado) {
 	return true;
 }
 
+function validarFoto() {
+	console.log(inputFoto.files[0].type.toLowerCase());
+	smallErro.innerText = '';
+	if((inputFoto.files[0].type.toLowerCase() !== 'application/jpeg') && (inputFoto.files[0].type.toLowerCase() !== 'application/jpg') && (inputFoto.files[0].type.toLowerCase() !== 'application/png')) {
+		smallErro.innerText = 'Tipo de arquivo inválido, selecione uma foto em JPEG, JPG ou PNG';
+		inputFoto.value = '';
+	}
+}
+
 function validarCurriculo() {
 	smallErro.innerText = '';
-	if(inputCurriculo.files[0].type !== 'application/pdf') {
-		smallErro.innerText = 'Tipo de arquivo inválido, selecione um arquivo pdf';
+	if(inputCurriculo.files[0].type.toLowerCase() !== 'application/pdf') {
+		smallErro.innerText = 'Tipo de arquivo inválido, selecione um curriculo em PDF';
 		inputCurriculo.value = '';
 	}
 }
+

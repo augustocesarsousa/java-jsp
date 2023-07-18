@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Editar usuário</title>
 	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="input-arquivo">
 						<label for="foto">Foto:</label>
-						<input type="file" name="foto">
+						<input type="file" name="foto" id="foto" onchange="validarFoto()">
 					</div>
 				</div>
 				<div class="input-right-content">
