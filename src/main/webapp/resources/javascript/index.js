@@ -176,19 +176,26 @@ function validarEstado(estado) {
 }
 
 function validarFoto() {
-	console.log(inputFoto.files[0].type.toLowerCase());
+	console.log(inputFoto.files[0].size);
 	smallErro.innerText = '';
 	if((inputFoto.files[0].type.toLowerCase() !== 'image/jpeg') && (inputFoto.files[0].type.toLowerCase() !== 'image/jpg') && (inputFoto.files[0].type.toLowerCase() !== 'image/png')) {
 		smallErro.innerText = 'Tipo de arquivo inválido, selecione uma foto em JPEG, JPG ou PNG';
 		inputFoto.value = '';
+	} else if (inputFoto.files[0].size > (1024 * 500)){
+		smallErro.innerText = 'Tamanho da foto inválido, máximo permitido 500KB';
+		inputFoto.value = '';		
 	}
 }
 
 function validarCurriculo() {
+	console.log(inputCurriculo.files[0].size);
 	smallErro.innerText = '';
 	if(inputCurriculo.files[0].type.toLowerCase() !== 'application/pdf') {
 		smallErro.innerText = 'Tipo de arquivo inválido, selecione um curriculo em PDF';
 		inputCurriculo.value = '';
+	} else if (inputCurriculo.files[0].size > (1024 * 1024)){
+		smallErro.innerText = 'Tamanho do currículo inválido, máximo permitido 1MB';
+		inputCurriculo.value = '';		
 	}
 }
 
