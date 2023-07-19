@@ -178,7 +178,7 @@ function validarEstado(estado) {
 function validarFoto() {
 	console.log(inputFoto.files[0].type.toLowerCase());
 	smallErro.innerText = '';
-	if((inputFoto.files[0].type.toLowerCase() !== 'application/jpeg') && (inputFoto.files[0].type.toLowerCase() !== 'application/jpg') && (inputFoto.files[0].type.toLowerCase() !== 'application/png')) {
+	if((inputFoto.files[0].type.toLowerCase() !== 'image/jpeg') && (inputFoto.files[0].type.toLowerCase() !== 'image/jpg') && (inputFoto.files[0].type.toLowerCase() !== 'image/png')) {
 		smallErro.innerText = 'Tipo de arquivo inválido, selecione uma foto em JPEG, JPG ou PNG';
 		inputFoto.value = '';
 	}

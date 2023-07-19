@@ -91,7 +91,9 @@ public class UsuarioServlet extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String cep = request.getParameter("cep");
 		String fotoBase64 = null;
+		Long fotoBase64Size = null;
 		String curriculoBase64 = null;
+		Long curriculoBase64Size = null;
 		Usuario usuario = null;
 		String acao = null;
 		String dadosValidados = null;
@@ -103,6 +105,7 @@ public class UsuarioServlet extends HttpServlet {
 				
 				if (arquivo.getSize() > 0) {
 					fotoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(converterStreamParaByte(arquivo.getInputStream()));					
+					fotoBase64Size = arquivo.getSize();
 				} else if (id != null){
 					fotoBase64 = usuarioDAO.consultaFoto(id);						
 				}
@@ -111,12 +114,13 @@ public class UsuarioServlet extends HttpServlet {
 				
 				if (arquivo.getSize() > 0) {
 					curriculoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(converterStreamParaByte(arquivo.getInputStream()));					
+					curriculoBase64Size =arquivo.getSize();
 				} else if (id != null){
 					curriculoBase64 = usuarioDAO.consultaCurriculo(id);						
 				}				
 			}			
 
-			usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotoBase64, curriculoBase64);
+			usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotoBase64, fotoBase64Size, curriculoBase64, curriculoBase64Size);
 			acao = usuario.getId() == null ? "cadastrar" : "editar";
 			dadosValidados = validarDados(usuario);
 			
@@ -212,11 +216,17 @@ public class UsuarioServlet extends HttpServlet {
 				return "Foto deve ser em formatos JPEG, JPG, PNG";
 			}			
 		}
+		if(usuario.getFotoBase64Size() != null && usuario.getFotoBase64Size() > (1024 * 500)) {
+			return "Tamanho da foto inválido, máximo suportado 500KB";		
+		}
 		if(usuario.getCurriculoBase64() != null) {
 			String type = usuario.getCurriculoBase64().split("[/;]")[1];
 			if(!type.equalsIgnoreCase("pdf")) {
 				return "Currículo deve ser em formato PDF";
 			}			
+		}
+		if(usuario.getCurriculoBase64Size() != null && usuario.getCurriculoBase64Size() > (1024 * 1024)) {
+			return "Tamanho do currículo inválido, máximo suportado 1MB";		
 		}
 		
 		Usuario usuarioLogin = usuarioDAO.consultaUsuarioPorLogin(usuario.getLogin());
