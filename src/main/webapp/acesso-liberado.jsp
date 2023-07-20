@@ -34,12 +34,12 @@
 						<tr>
 							<td><c:out value="${usuario.id}"></c:out></td>
 							<td>
-								<c:if test="${usuario.fotoBase64 != null}">
+								<c:if test="${usuario.fotoMiniaturaBase64 != null}">
 									<a href="UsuarioServlet?acao=download&tipo=foto&id=${usuario.id}" title="Download da foto">
-										<img alt="Foto do usuário" src="<c:out value="${usuario.fotoBase64}"></c:out>" width="32px" height="32px">
+										<img alt="Foto do usuário" src="<c:out value="${usuario.fotoMiniaturaBase64}"></c:out>" width="32px" height="32px">
 									</a>
 								</c:if>
-								<c:if test="${usuario.fotoBase64 == null}">
+								<c:if test="${usuario.fotoMiniaturaBase64 == null}">
 									<img alt="Foto do usuário" src="resources/img/usuario_padrao.jpeg" width="32px" height="32px">
 								</c:if>
 							</td>
@@ -47,12 +47,12 @@
 							<td><c:out value="${usuario.nome}"></c:out></td>
 							<td><c:out value="${usuario.email}"></c:out></td>
 							<td>
-								<c:if test="${usuario.curriculoBase64 != null}">
+								<c:if test="${usuario.temCurriculo == true}">
 									<a href="UsuarioServlet?acao=download&tipo=curriculo&id=${usuario.id}" class="btn btn-square" title="Download do curriculo">
 										<i class="fa-solid fa-file-arrow-down fa-xl"></i>
 									</a>
 								</c:if>
-								<c:if test="${usuario.curriculoBase64 == null}">
+								<c:if test="${usuario.temCurriculo == false}">
 									<i class="fa-solid fa-file-excel fa-xl"></i>
 								</c:if>
 								

@@ -20,7 +20,7 @@ public class UsuarioDAO {
 	
 	public void cadastrar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotobase64, curriculobase64) "
+			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotobase64, fotominiaturabase64, curriculobase64) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -37,7 +37,9 @@ public class UsuarioDAO {
 			preparedStatement.setString(11, usuario.getEstado());
 			preparedStatement.setString(12, usuario.getCep());
 			preparedStatement.setString(13, usuario.getFotoBase64());
-			preparedStatement.setString(14, usuario.getCurriculoBase64());
+			preparedStatement.setString(14, usuario.getFotoMiniaturaBase64());
+			preparedStatement.setString(15, usuario.getCurriculoBase64());
+			preparedStatement.setBoolean(16, usuario.getTemCurriculo());
 			preparedStatement.execute();	
 			
 			conn.commit();
@@ -60,22 +62,21 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				return new Usuario(
-						resultSet.getLong("id"), 
-						resultSet.getString("login"), 
-						resultSet.getString("senha"),
-						resultSet.getString("nome"),
-						resultSet.getString("sobrenome"),
-						resultSet.getString("email"),
-						resultSet.getString("telefone"),
-						resultSet.getString("logradouro"),
-						resultSet.getInt("numero"),
-						resultSet.getString("bairro"),
-						resultSet.getString("cidade"),
-						resultSet.getString("estado"),
-						resultSet.getString("cep"),
-						resultSet.getString("fotobase64"),
-						resultSet.getString("curriculobase64"));
+				Usuario usuario = new Usuario();
+				usuario.setId(resultSet.getLong("id"));
+				usuario.setLogin(resultSet.getString("login"));
+				usuario.setSenha(resultSet.getString("senha"));
+				usuario.setNome(resultSet.getString("nome"));
+				usuario.setSobrenome(resultSet.getString("sobrenome"));
+				usuario.setEmail(resultSet.getString("email"));
+				usuario.setTelefone(resultSet.getString("telefone"));
+				usuario.setLogradouro(resultSet.getString("logradouro"));
+				usuario.setNumero(resultSet.getInt("numero"));
+				usuario.setBairro(resultSet.getString("bairro"));
+				usuario.setCidade(resultSet.getString("cidade"));
+				usuario.setEstado(resultSet.getString("estado"));
+				usuario.setCep(resultSet.getString("cep"));
+				return usuario;
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,7 +86,7 @@ public class UsuarioDAO {
 	
 	public Usuario consultaUsuarioPorLogin(String login) {		
 		try {
-			String sql = "SELECT * FROM usuario WHERE login = ?";	
+			String sql = "SELECT id FROM usuario WHERE login = ?";	
 			
 			PreparedStatement preparedStatement;
 			preparedStatement = conn.prepareStatement(sql);
@@ -93,22 +94,9 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				return new Usuario(
-						resultSet.getLong("id"), 
-						resultSet.getString("login"), 
-						resultSet.getString("senha"),
-						resultSet.getString("nome"),
-						resultSet.getString("sobrenome"),
-						resultSet.getString("email"),
-						resultSet.getString("telefone"),
-						resultSet.getString("logradouro"),
-						resultSet.getInt("numero"),
-						resultSet.getString("bairro"),
-						resultSet.getString("cidade"),
-						resultSet.getString("estado"),
-						resultSet.getString("cep"),
-						resultSet.getString("fotobase64"),
-						resultSet.getString("curriculobase64")); 
+				Usuario usuario = new Usuario();
+				usuario.setId(resultSet.getLong("id"));
+				return usuario; 
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,22 +113,22 @@ public class UsuarioDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				Usuario usuario = new Usuario(
-						resultSet.getLong("id"), 
-						resultSet.getString("login"), 
-						resultSet.getString("senha"),
-						resultSet.getString("nome"),
-						resultSet.getString("sobrenome"),
-						resultSet.getString("email"),
-						resultSet.getString("telefone"),
-						resultSet.getString("logradouro"),
-						resultSet.getInt("numero"),
-						resultSet.getString("bairro"),
-						resultSet.getString("cidade"),
-						resultSet.getString("estado"),
-						resultSet.getString("cep"),
-						resultSet.getString("fotobase64"),
-						resultSet.getString("curriculobase64"));
+				Usuario usuario = new Usuario();
+				usuario.setId(resultSet.getLong("id"));
+				usuario.setLogin(resultSet.getString("login"));
+				usuario.setSenha(resultSet.getString("senha"));
+				usuario.setNome(resultSet.getString("nome"));
+				usuario.setSobrenome(resultSet.getString("sobrenome"));
+				usuario.setEmail(resultSet.getString("email"));
+				usuario.setTelefone(resultSet.getString("telefone"));
+				usuario.setLogradouro(resultSet.getString("logradouro"));
+				usuario.setNumero(resultSet.getInt("numero"));
+				usuario.setBairro(resultSet.getString("bairro"));
+				usuario.setCidade(resultSet.getString("cidade"));
+				usuario.setEstado(resultSet.getString("estado"));
+				usuario.setCep(resultSet.getString("cep"));
+				usuario.setFotoMiniaturaBase64(resultSet.getString("fotominiaturabase64"));
+				usuario.setTemCurriculo(resultSet.getBoolean("temcurriculo"));
 				usuarios.add(usuario);
 			}
 		} catch (SQLException e) {
@@ -171,7 +159,8 @@ public class UsuarioDAO {
 	public void update(Usuario usuario) {
 		try {
 			String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, sobrenome = ?, email = ?, telefone = ?, "
-					+ "logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ?, fotobase64 = ?, curriculobase64 = ? WHERE id = ?";
+					+ "logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ?, fotobase64 = ?, "
+					+ "fotominiaturabase64 = ?, curriculobase64 = ?, temcurriculo = ? WHERE id = ?";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
@@ -187,8 +176,10 @@ public class UsuarioDAO {
 			preparedStatement.setString(11, usuario.getEstado());
 			preparedStatement.setString(12, usuario.getCep());
 			preparedStatement.setString(13, usuario.getFotoBase64());
-			preparedStatement.setString(14, usuario.getCurriculoBase64());
-			preparedStatement.setLong(15, usuario.getId());
+			preparedStatement.setString(14, usuario.getFotoMiniaturaBase64());
+			preparedStatement.setString(15, usuario.getCurriculoBase64());
+			preparedStatement.setBoolean(16, usuario.getTemCurriculo());
+			preparedStatement.setLong(17, usuario.getId());
 			preparedStatement.executeUpdate();	
 			
 			conn.commit();

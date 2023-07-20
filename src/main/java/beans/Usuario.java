@@ -18,53 +18,13 @@ public class Usuario {
 	private String estado;
 	private String cep;
 	private String fotoBase64;
+	private String fotoMiniaturaBase64;
 	private Long fotoBase64Size;
 	private String curriculoBase64;
 	private Long curriculoBase64Size;
+	private Boolean temCurriculo;
 	
 	public Usuario() {
-	}
-	
-	public Usuario(Long id, String login, String senha, String nome, String sobrenome, String email, String telefone,
-			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep, 
-			String fotoBase64, String curriculoBase64) {
-		this.id = id;
-		this.login = login;
-		this.senha = senha;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.email = email;
-		this.telefone = telefone;
-		this.logradouro = logradouro;
-		this.numero = numero;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.cep = cep;
-		this.fotoBase64 = fotoBase64;
-		this.curriculoBase64 = curriculoBase64;
-	}
-	
-	public Usuario(Long id, String login, String senha, String nome, String sobrenome, String email, String telefone,
-			String logradouro, Integer numero, String bairro, String cidade, String estado, String cep, 
-			String fotoBase64, Long fotoBase64Size, String curriculoBase64, Long curriculoBase64Size) {
-		this.id = id;
-		this.login = login;
-		this.senha = senha;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.email = email;
-		this.telefone = telefone;
-		this.logradouro = logradouro;
-		this.numero = numero;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.cep = cep;
-		this.fotoBase64 = fotoBase64;
-		this.fotoBase64Size = fotoBase64Size;
-		this.curriculoBase64 = curriculoBase64;
-		this.curriculoBase64Size = curriculoBase64Size;
 	}
 
 	public Long getId() {
@@ -200,12 +160,27 @@ public class Usuario {
 		this.curriculoBase64Size = curriculoBase64Size;
 	}
 
+	public String getFotoMiniaturaBase64() {
+		return fotoMiniaturaBase64;
+	}
+
+	public void setFotoMiniaturaBase64(String fotoMiniaturaBase64) {
+		this.fotoMiniaturaBase64 = fotoMiniaturaBase64;
+	}
+
+	public Boolean getTemCurriculo() {
+		return temCurriculo;
+	}
+
+	public void setTemCurriculo(Boolean temCurriculo) {
+		this.temCurriculo = temCurriculo;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", nome=" + nome + ", sobrenome="
 				+ sobrenome + ", email=" + email + ", telefone=" + telefone + ", logradouro=" + logradouro + ", numero="
-				+ numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep
-				+ ", fotoBase64=" + fotoBase64 + "]";
+				+ numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + "]";
 	}
 
 	@Override

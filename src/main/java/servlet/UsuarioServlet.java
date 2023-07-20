@@ -1,5 +1,7 @@
 package servlet;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -75,6 +79,7 @@ public class UsuarioServlet extends HttpServlet {
 		}
 	}
 	
+	@SuppressWarnings("null")
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = request.getParameter("id") != null ? Long.parseLong(request.getParameter("id")) : null;
@@ -91,21 +96,46 @@ public class UsuarioServlet extends HttpServlet {
 		String estado = request.getParameter("estado");
 		String cep = request.getParameter("cep");
 		String fotoBase64 = null;
+		String fotoMiniaturaBase64 = null;
 		Long fotoBase64Size = null;
 		String curriculoBase64 = null;
 		Long curriculoBase64Size = null;
-		Usuario usuario = null;
+		Boolean temCurriculo = false;
+		Usuario usuario = new Usuario();
 		String acao = null;
 		String dadosValidados = null;
 		
 		try {
 			if(ServletFileUpload.isMultipartContent(request)) {
 				Part arquivo = request.getPart("foto");
-				new Base64();
 				
 				if (arquivo.getSize() > 0) {
-					fotoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(converterStreamParaByte(arquivo.getInputStream()));					
+					byte[] arquivoBytes = converterStreamParaByte(arquivo.getInputStream());
+					fotoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(arquivoBytes);					
 					fotoBase64Size = arquivo.getSize();
+					
+					/*Miniatura da imagem*/
+					
+					//Transforma em um bufferedImage
+					byte[] fotoByteDecode = Base64.decodeBase64(Base64.encodeBase64String(arquivoBytes));
+					BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(fotoByteDecode));
+					
+					//Pega o tipo da Imagem
+					int typeImage = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+					
+					//Cria a miniatura
+					BufferedImage resizedImage = new BufferedImage(32, 32, typeImage);
+					Graphics2D graphics2d = resizedImage.createGraphics();
+					graphics2d.drawImage(bufferedImage, 0, 0, 32, 32, null);
+					graphics2d.dispose();
+					
+					//Reescreve a imagem
+					ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+					ImageIO.write(resizedImage, "png", byteArrayOutputStream);
+					
+					fotoMiniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(byteArrayOutputStream.toByteArray());
+					//System.out.println(fotoMiniaturaBase64);
+					
 				} else if (id != null){
 					fotoBase64 = usuarioDAO.consultaFoto(id);						
 				}
@@ -114,13 +144,33 @@ public class UsuarioServlet extends HttpServlet {
 				
 				if (arquivo.getSize() > 0) {
 					curriculoBase64 = "data:" + arquivo.getContentType() + ";base64," + Base64.encodeBase64String(converterStreamParaByte(arquivo.getInputStream()));					
-					curriculoBase64Size =arquivo.getSize();
+					curriculoBase64Size = arquivo.getSize();
+					temCurriculo = true;
 				} else if (id != null){
-					curriculoBase64 = usuarioDAO.consultaCurriculo(id);						
+					curriculoBase64 = usuarioDAO.consultaCurriculo(id);		
+					temCurriculo = curriculoBase64 != null ? true : false;
 				}				
 			}			
 
-			usuario = new Usuario(id, login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotoBase64, fotoBase64Size, curriculoBase64, curriculoBase64Size);
+			usuario.setId(id);
+			usuario.setLogin(login);
+			usuario.setSenha(senha);
+			usuario.setNome(nome);
+			usuario.setSobrenome(sobrenome);
+			usuario.setEmail(email);
+			usuario.setTelefone(telefone);
+			usuario.setLogradouro(logradouro);
+			usuario.setNumero(numero);
+			usuario.setBairro(bairro);
+			usuario.setCidade(cidade);
+			usuario.setEstado(estado);
+			usuario.setCep(cep);
+			usuario.setFotoBase64(fotoBase64);
+			usuario.setFotoBase64Size(fotoBase64Size);
+			usuario.setFotoMiniaturaBase64(fotoMiniaturaBase64);
+			usuario.setCurriculoBase64(curriculoBase64);
+			usuario.setCurriculoBase64Size(curriculoBase64Size);
+			usuario.setTemCurriculo(temCurriculo);
 			acao = usuario.getId() == null ? "cadastrar" : "editar";
 			dadosValidados = validarDados(usuario);
 			
@@ -252,7 +302,6 @@ public class UsuarioServlet extends HttpServlet {
 			response.setHeader("Content-Disposition", "attachment;filename=arquivo." + arquivoBase64Download.split("[/;]")[1]);
 			
 			/*Converte a base64 da imagem do bacno para byte[]*/
-			new Base64();
 			byte[] arquivoBase64Bytes = Base64.decodeBase64(arquivoBase64Download.split("base64,")[1]);
 			
 			/*Coloca os bytes em um objeto de entrada para processr*/
