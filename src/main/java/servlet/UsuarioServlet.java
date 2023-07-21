@@ -227,14 +227,14 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	private String validarDados(Usuario usuario) {				
-		if(usuario.getLogin() == null || usuario.getLogin().length() < 4) {
-			return "Usuário precisa ter pelo menos 4 dígitos";
+		if(usuario.getLogin() == null || usuario.getLogin().length() < 4 || usuario.getLogin().length() > 20) {
+			return "Usuário inválido, mínimo 4, máximo 20 dígitos";
 		}				
-		if(usuario.getSenha() == null || usuario.getSenha().length() < 4) {
-			return "Senha precisa ter pelo menos 4 dígitos";
+		if(usuario.getSenha() == null || usuario.getSenha().length() < 4 || usuario.getSenha().length() > 20) {
+			return "Senha inválida, mínimo 4, máximo 20 dígitos";
 		}				
-		if(usuario.getNome() == null || usuario.getNome().isEmpty()) {
-			return "Informe o nome do usuário";
+		if(usuario.getNome() == null || usuario.getNome().length() < 4 || usuario.getNome().length() > 20) {
+			return "Nome inválido, mínimo 4, máximo 20 dígitos";
 		}				
 		if(!Pattern.compile("^(.+)@(.+)$").matcher(usuario.getEmail()).matches()) {
 			return "Email inválido";
@@ -242,20 +242,20 @@ public class UsuarioServlet extends HttpServlet {
 		if(!Pattern.compile("^(\\d{10,11})$").matcher(usuario.getTelefone()).matches()) {
 			return "Telefone inválido";
 		}				
-		if(usuario.getLogradouro() == null || usuario.getLogradouro().isEmpty()) {
-			return "Logradouro inválido";
+		if(usuario.getLogradouro() == null || usuario.getLogradouro().isEmpty() || usuario.getLogradouro().length() > 100) {
+			return "Logradouro inválido, máximo 100 dígitos";
 		}				
-		if(usuario.getNumero() == null || usuario.getNumero() < 0) {
-			return "Numero inválido";
+		if(usuario.getNumero() == null || usuario.getNumero() < 0  || usuario.getNumero() > 999999) {
+			return "Numero inválido, mínimo 1, máximo 999999";
 		}				
-		if(usuario.getBairro() == null || usuario.getBairro().isEmpty()) {
-			return "Bairro inválido";
+		if(usuario.getBairro() == null || usuario.getBairro().isEmpty() || usuario.getBairro().length() > 100) {
+			return "Bairro inválido, máximo 100 dígitos";
 		}				
-		if(usuario.getCidade() == null || usuario.getCidade().isEmpty()) {
-			return "Cidade inválido";
+		if(usuario.getCidade() == null || usuario.getCidade().isEmpty() || usuario.getCidade().length() > 100) {
+			return "Cidade inválida, máximo 100 dígitos";
 		}				
-		if(usuario.getEstado() == null || usuario.getEstado().isEmpty()) {
-			return "Estado inválido";
+		if(usuario.getEstado() == null || usuario.getEstado().isEmpty() || usuario.getEstado().length() != 2) {
+			return "Estado inválido, entre com a UF de 2 dígitos";
 		}				
 		if(usuario.getCep() == null || usuario.getCep().isEmpty()) {
 			return "Cep inválido";

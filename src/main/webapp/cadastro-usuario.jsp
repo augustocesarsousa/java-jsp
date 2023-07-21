@@ -120,7 +120,7 @@
 						</c:if>
 					</div>
 					<div class="input-content">
-						<label for="estado">Estado:</label>
+						<label for="estado">Estado (UF):</label>
 						<c:if test="${usuario.estado != null}">
 							<input type="text" id="estado" name="estado" value="${usuario.estado}" maxlength="2">				
 						</c:if>
