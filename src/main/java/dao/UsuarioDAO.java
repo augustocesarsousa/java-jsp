@@ -20,8 +20,8 @@ public class UsuarioDAO {
 	
 	public void cadastrar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotobase64, fotominiaturabase64, curriculobase64) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuario (login, senha, nome, sobrenome, email, telefone, logradouro, numero, bairro, cidade, estado, cep, fotobase64, fotominiaturabase64, curriculobase64, temcurriculo) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());

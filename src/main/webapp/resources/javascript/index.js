@@ -35,6 +35,17 @@ inputCep.addEventListener('focusout', () => {
 	}
 })
 
+inputTelefone.onkeypress = () => {
+	if(inputTelefone.value.length == 11) {
+		return false;
+	}
+}
+
+inputNumero.onkeypress = () => {
+	if(inputNumero.value.length == 6) {
+		return false;
+	}
+}
 	
 function validarForm() {
 	if(!validarLogin(inputLogin.value)){

@@ -17,46 +17,46 @@
 					<div class="input-content">
 						<label for="login">Usuário:</label>
 						<c:if test="${usuario.login != null}">
-							<input type="text" id="login" name="login" value="${usuario.login}">				
+							<input type="text" id="login" name="login" value="${usuario.login}" maxlength="20">				
 						</c:if>
 						<c:if test="${usuario.login == null}">
-							<input type="text" id="login" name="login">				
+							<input type="text" id="login" name="login" maxlength="20">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="senha">Senha:</label>
 						<c:if test="${usuario.senha != null}">
-							<input type="password" id="senha" name="senha" value="${usuario.senha}">				
+							<input type="password" id="senha" name="senha" value="${usuario.senha}" maxlength="20">				
 						</c:if>
 						<c:if test="${usuario.senha == null}">
-							<input type="password" id="senha" name="senha">				
+							<input type="password" id="senha" name="senha" maxlength="20">				
 						</c:if>		
 					</div>
 					<div class="input-content">
 						<label for="nome">Nome:</label>
 						<c:if test="${usuario.nome != null}">
-							<input type="text" id="nome" name="nome" value="${usuario.nome}">				
+							<input type="text" id="nome" name="nome" value="${usuario.nome}" maxlength="20">				
 						</c:if>
 						<c:if test="${usuario.nome == null}">
-							<input type="text" id="nome" name="nome">				
+							<input type="text" id="nome" name="nome" maxlength="20">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="sobrenome">Sobrenome:</label>
 						<c:if test="${usuario.sobrenome != null}">
-							<input type="text" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}">				
+							<input type="text" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}" maxlength="20">				
 						</c:if>
 						<c:if test="${usuario.sobrenome == null}">
-							<input type="text" id="sobrenome" name="sobrenome">				
+							<input type="text" id="sobrenome" name="sobrenome" maxlength="20">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="email">Email:</label>
 						<c:if test="${usuario.email != null}">
-							<input type="text" id="email" name="email" value="${usuario.email}">				
+							<input type="text" id="email" name="email" value="${usuario.email}" maxlength="100">				
 						</c:if>
 						<c:if test="${usuario.email == null}">
-							<input type="text" id="email" name="email">				
+							<input type="text" id="email" name="email" maxlength="100">				
 						</c:if>
 					</div>
 					<div class="input-content">
@@ -77,55 +77,55 @@
 					<div class="input-content">
 						<label for="cep">CEP:</label>
 						<c:if test="${usuario.cep != null}">
-							<input type="number" id="cep" name="cep" value="${usuario.cep}">				
+							<input type="number" id="cep" name="cep" value="${usuario.cep}" maxlength="8">				
 						</c:if>
 						<c:if test="${usuario.cep == null}">
-							<input type="number" id="cep" name="cep">				
+							<input type="number" id="cep" name="cep" maxlength="8">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="logradouro">Logradouro:</label>
 						<c:if test="${usuario.logradouro != null}">
-							<input type="text" id="logradouro" name="logradouro" value="${usuario.logradouro}">				
+							<input type="text" id="logradouro" name="logradouro" value="${usuario.logradouro}" maxlength="100">				
 						</c:if>
 						<c:if test="${usuario.logradouro == null}">
-							<input type="text" id="logradouro" name="logradouro">				
+							<input type="text" id="logradouro" name="logradouro" maxlength="100">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="numero">Numero:</label>
 						<c:if test="${usuario.numero != null}">
-							<input type="number" id="numero" name="numero" value="${usuario.numero}">				
+							<input type="number" id="numero" name="numero" value="${usuario.numero}" maxlength="5">				
 						</c:if>
 						<c:if test="${usuario.logradouro == null}">
-							<input type="text" id="numero" name="numero">				
+							<input type="text" id="numero" name="numero" maxlength="5">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="bairro">Bairro:</label>
 						<c:if test="${usuario.bairro != null}">
-							<input type="text" id="bairro" name="bairro" value="${usuario.bairro}">				
+							<input type="text" id="bairro" name="bairro" value="${usuario.bairro}" maxlength="100">				
 						</c:if>
 						<c:if test="${usuario.logradouro == null}">
-							<input type="text" id="bairro" name="bairro">				
+							<input type="text" id="bairro" name="bairro" maxlength="100">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="cidade">Cidade:</label>
 						<c:if test="${usuario.cidade != null}">
-							<input type="text" id="cidade" name="cidade" value="${usuario.cidade}">				
+							<input type="text" id="cidade" name="cidade" value="${usuario.cidade}" maxlength="100">				
 						</c:if>
 						<c:if test="${usuario.cidade == null}">
-							<input type="text" id="cidade" name="cidade">				
+							<input type="text" id="cidade" name="cidade" maxlength="100">				
 						</c:if>
 					</div>
 					<div class="input-content">
 						<label for="estado">Estado:</label>
 						<c:if test="${usuario.estado != null}">
-							<input type="text" id="estado" name="estado" value="${usuario.estado}">				
+							<input type="text" id="estado" name="estado" value="${usuario.estado}" maxlength="2">				
 						</c:if>
 						<c:if test="${usuario.estado == null}">
-							<input type="text" id="estado" name="estado">				
+							<input type="text" id="estado" name="estado" maxlength="2">				
 						</c:if>
 					</div>
 					<div class="input-arquivo">

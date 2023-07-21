@@ -50,11 +50,11 @@
 		<form action="LoginServlet" method="post" onsubmit="return validarForm() ? true : false">
 			<div class="input-content">
 				<label for="login">Usuário:</label>
-				<input type="text" id="login" name="login">
+				<input type="text" id="login" name="login" maxlength="20">
 			</div>
 			<div class="input-content">
 				<label for="senha">Senha:</label>
-				<input type="password" id="senha" name="senha">		
+				<input type="password" id="senha" name="senha" maxlength="20">
 			</div>
 			<button type="submit" class="btn btn-blue">Entrar</button>
 		</form>	

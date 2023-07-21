@@ -20,23 +20,23 @@
 					</div>
 					<div class="input-content">
 						<label for="login">Usuário:</label>
-						<input type="text" id="login" name="login" value="${usuario.login}">
+						<input type="text" id="login" name="login" value="${usuario.login}" maxlength="20">
 					</div>	
 					<div class="input-content">
 						<label for="senha">Senha:</label>
-						<input type="password" id="senha" name="senha" value="${usuario.senha}">		
+						<input type="password" id="senha" name="senha" value="${usuario.senha}" maxlength="20">		
 					</div>
 					<div class="input-content">
 						<label for="nome">Nome:</label>
-						<input type="text" id="nome" name="nome" value="${usuario.nome}">
+						<input type="text" id="nome" name="nome" value="${usuario.nome}" maxlength="20">
 					</div>
 					<div class="input-content">
 						<label for="sobrenome">Sobrenome:</label>
-						<input type="text" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}">
+						<input type="text" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}" maxlength="20">
 					</div>
 					<div class="input-content">
 						<label for="email">Email:</label>
-						<input type="text" id="email" name="email" value="${usuario.email}">
+						<input type="text" id="email" name="email" value="${usuario.email}" maxlength="100">
 					</div>
 					<div class="input-content">
 						<label for="telefone">Telefone:</label>
@@ -50,27 +50,27 @@
 				<div class="input-right-content">
 					<div class="input-content">
 						<label for="cep">CEP:</label>
-						<input type="text" id="cep" name="cep" value="${usuario.cep}">
+						<input type="text" id="cep" name="cep" value="${usuario.cep}" maxlength="8">
 					</div>
 					<div class="input-content">
 						<label for="logradouro">Logradouro:</label>
-						<input type="text" id="logradouro" name="logradouro" value="${usuario.logradouro}">
+						<input type="text" id="logradouro" name="logradouro" value="${usuario.logradouro}" maxlength="100">
 					</div>
 					<div class="input-content">
 						<label for="numero">Numero:</label>
-						<input type="number" id="numero" name="numero" value="${usuario.numero}">
+						<input type="number" id="numero" name="numero" value="${usuario.numero}" maxlength="5">
 					</div>
 					<div class="input-content">
 						<label for="bairro">Bairro:</label>
-						<input type="text" id="bairro" name="bairro" value="${usuario.bairro}">
+						<input type="text" id="bairro" name="bairro" value="${usuario.bairro}" maxlength="100">
 					</div>
 					<div class="input-content">
 						<label for="cidade">Cidade:</label>
-						<input type="text" id="cidade" name="cidade" value="${usuario.cidade}">
+						<input type="text" id="cidade" name="cidade" value="${usuario.cidade}" maxlength="100">
 					</div>
 					<div class="input-content">
 						<label for="estado">Estado:</label>
-						<input type="text" id="estado" name="estado" value="${usuario.estado}">
+						<input type="text" id="estado" name="estado" value="${usuario.estado}" maxlength="2">
 					</div>
 					<div class="input-arquivo">
 						<label for="curriculo">Curriculo:</label>
