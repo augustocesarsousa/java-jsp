@@ -43,7 +43,8 @@
 						<input type="text" id="telefone" name="telefone" value="${usuario.telefone}">
 					</div>
 					<div class="input-arquivo">
-						<label for="foto">Foto:</label>
+						<span>Foto</span>
+						<label id="label-input-foto" for="foto">Carregar arquivo...</label>
 						<input type="file" name="foto" id="foto" onchange="validarFoto()">
 					</div>
 				</div>
@@ -73,7 +74,8 @@
 						<input type="text" id="estado" name="estado" value="${usuario.estado}" maxlength="2">
 					</div>
 					<div class="input-arquivo">
-						<label for="curriculo">Curriculo:</label>
+						<span>Currículo</span>
+						<label id="label-input-curriculo" for="curriculo">Carregar arquivo...</label>
 						<input type="file" id="curriculo" name="curriculo" onchange="validarCurriculo()">
 					</div>
 				</div>
