@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 					break;
 				}
 				case "liberar": {
-					dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
+					dispacher = request.getRequestDispatcher("listar.jsp");
 					request.setAttribute("usuarios", usuarioDAO.listar());
 					break;
 				}

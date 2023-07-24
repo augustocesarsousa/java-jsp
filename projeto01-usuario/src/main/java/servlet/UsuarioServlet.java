@@ -82,7 +82,7 @@ public class UsuarioServlet extends HttpServlet {
 	@SuppressWarnings("null")
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Long id = request.getParameter("id") != null ? Long.parseLong(request.getParameter("id")) : null;
+		Long id = request.getParameter("id").equals("") ? null : Long.parseLong(request.getParameter("id"));
 		String login = request.getParameter("login").replace(" ", "");
 		String senha = request.getParameter("senha").replace(" ", "");
 		String nome = request.getParameter("nome").replace(" ", "");
@@ -195,22 +195,14 @@ public class UsuarioServlet extends HttpServlet {
 			
 			switch (acao) {
 				case "listar": {
-					dispacher = request.getRequestDispatcher("acesso-liberado.jsp");
+					dispacher = request.getRequestDispatcher("listar.jsp");
 					request.setAttribute("usuarios", usuarioDAO.listar());
 					break;
 				}
-				case "editar": {
-					dispacher = request.getRequestDispatcher("editar-usuario.jsp");
-					request.setAttribute("usuario", usuario);
-					break;
-				}
-				case "cadastrar": {
-					dispacher = request.getRequestDispatcher("cadastro-usuario.jsp");
-					request.setAttribute("usuario", usuario);
-					break;
-				}
 				default:
-					throw new IllegalArgumentException("Unexpected value: " + acao);
+					dispacher = request.getRequestDispatcher("perfil.jsp");
+					request.setAttribute("usuario", usuario);
+					break;
 			}
 			
 			if(erro) {

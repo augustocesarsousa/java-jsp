@@ -5,16 +5,16 @@
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
-	<title>Editar usuário</title>
+	<title>Perfil do usuário</title>
 	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
 	<div class="container">
-		<h1>Edição de Usuário</h1>
+		<h1>Perfil do usuário</h1>
 		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false" enctype="multipart/form-data">
 			<div class="input-container">
 				<div class="input-left-content">
-					<div class="input-content">
+					<div id="input-content-id" class="input-content">
 						<label for="login">ID:</label>
 						<input type="text" id="id" name="id" value="${usuario.id}" readonly>
 					</div>

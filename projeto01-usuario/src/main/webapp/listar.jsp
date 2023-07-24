@@ -25,7 +25,7 @@
 						<th>Email</th>
 						<th>Curriculo</th>
 						<th colspan="2">
-							<a href="cadastro-usuario.jsp" class="btn btn-middle btn-green">Cadastrar</a>
+							<a href="perfil.jsp" class="btn btn-middle btn-green">Cadastrar</a>
 						</th>			
 					</tr>
 				</thead>
