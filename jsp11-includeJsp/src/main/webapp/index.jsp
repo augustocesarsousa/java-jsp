@@ -3,10 +3,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Primeiro JSP</title>
+<title>Include JSP</title>
 </head>
 <body>
-	<h1>Curso JSP - Primeiro JSP</h1>
-	<p>Hello World in JSP</p>
+	<jsp:include page="navbar.jsp">
+		<jsp:param value="Imagem Logo" name="logo"/>
+	</jsp:include>
+	<h1>Curso JSP - Include JSP</h1>
 </body>
 </html>

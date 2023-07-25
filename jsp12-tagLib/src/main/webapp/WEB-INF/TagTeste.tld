@@ -3,10 +3,10 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
         version="2.1">
     <tlib-version>1.0</tlib-version>
-	<short-name>MinhaTag</short-name>
+	<short-name>TagTeste</short-name>
 	<tag>
 		<name>minhatag</name>
-		<tag-class>tags.MinhaTag</tag-class>
+		<tag-class>tag.TagTesteJsp</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 </taglib>
