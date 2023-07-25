@@ -104,12 +104,21 @@ public class UsuarioDAO {
 		return null;
 	}
 	
-	public List<Usuario> listar() {
+	public List<Usuario> listar(String nome) {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
-		String sql = "SELECT * FROM usuario ORDER BY id";
+//		String sql = "SELECT * FROM usuario ORDER BY id";
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM usuario WHERE 1=1 ");
+		if(nome != null && !nome.isEmpty()) {
+			sql.append("AND nome ILIKE ? ");
+		}
+		sql.append("ORDER BY id");
 		try {
-			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			PreparedStatement preparedStatement = conn.prepareStatement(sql.toString());
+			if(nome != null && !nome.isEmpty()) {
+				preparedStatement.setString(1, "%" + nome + "%");
+			}
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {

@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
+	<%
+		if(session.getAttribute("user") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
 	<div class="container">
 		<h1>Perfil do usuário</h1>
 		<form action="UsuarioServlet" method="post" onsubmit="return validarForm() ? true : false" enctype="multipart/form-data">

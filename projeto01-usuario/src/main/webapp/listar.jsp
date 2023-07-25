@@ -11,9 +11,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+	<%
+		if(session.getAttribute("user") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
 	<div class="container">
-		<a href="index.jsp" title="Sair" id="btn-sair"><i class="fa fa-xmark"></i></a>
+		<a href="perfil.jsp" id="btn-novo" title="Cadastrar usuário"><i class="fa-solid fa-plus"></i>&nbsp;Novo</a>
+		<a href="LogoutServlet" id="btn-sair" title="Sair">Sair&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a>
 		<h1>Lista de usuários</h1>	
+		<form action="pesquisa" method="POST" id="formPesquisa">			
+			<div class="input-content">
+				<label for="nomePesquisa">Nome:</label>
+				<input type="text" id="nomePesquisa" name="nomePesquisa" maxlength="100">
+				<input type="submit" id="submitNomePesquisa" value="Pesquisar">
+			</div>
+		</form>
 		<div id="table-container">
 			<table class="table-content">
 				<thead>
@@ -25,7 +38,6 @@
 						<th>Email</th>
 						<th>Curriculo</th>
 						<th colspan="2">
-							<a href="perfil.jsp" class="btn btn-middle btn-green">Cadastrar</a>
 						</th>			
 					</tr>
 				</thead>

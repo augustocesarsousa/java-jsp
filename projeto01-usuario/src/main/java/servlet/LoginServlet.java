@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //import beans.Login;
 import dao.LoginDAO;
@@ -32,15 +33,16 @@ public class LoginServlet extends HttpServlet {
 		String login = request.getParameter("login").trim();
 		String senha = request.getParameter("senha").trim();
 		String dadosValidados = validarDados(login, senha);
+		HttpSession session = request.getSession(true);
 		
 		if (dadosValidados == null) {
 			if (loginDAO.validarLogin(login, senha)) {
-				redirecionar(request, response, "liberar", false, null);
+				redirecionar(request, response, session, login, "liberar", false, null);
 			} else {
-				redirecionar(request, response, "bloquear", true, "Usuário ou senha inválido!");				
+				redirecionar(request, response, null, null, "bloquear", true, "Usuário ou senha inválido!");				
 			}
 		} else {
-			redirecionar(request, response, "bloquear", true, dadosValidados);	
+			redirecionar(request, response, null, null, "bloquear", true, dadosValidados);	
 		}
 	}
 	
@@ -54,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 		return null;
 	}
 	
-	private void redirecionar(HttpServletRequest request, HttpServletResponse response, String acao, Boolean erro, String mensagem) {
+	private void redirecionar(HttpServletRequest request, HttpServletResponse response, HttpSession session, String login, String acao, Boolean erro, String mensagem) {
 		try {
 			RequestDispatcher dispacher;
 			
@@ -65,7 +67,8 @@ public class LoginServlet extends HttpServlet {
 				}
 				case "liberar": {
 					dispacher = request.getRequestDispatcher("listar.jsp");
-					request.setAttribute("usuarios", usuarioDAO.listar());
+					request.setAttribute("usuarios", usuarioDAO.listar(null));
+					session.setAttribute("user", login);
 					break;
 				}
 				default:

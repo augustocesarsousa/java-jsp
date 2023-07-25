@@ -63,6 +63,24 @@ input[type='file'] {
 	align-items: center;
 }
 
+#formPesquisa {
+	padding: 0;
+}
+
+#formPesquisa .input-content {
+	display: flex;
+}
+
+#formPesquisa .input-content #nomePesquisa {
+	border-radius: 5px 0 0 5px;	
+}
+
+#formPesquisa .input-content #submitNomePesquisa {
+	border-radius: 0 5px 5px 0;	
+	border: 1px solid rgba(0,0,0,0.3);
+	width: 70px;
+}
+
 .input-content,
 .input-arquivo {
 	width: 100%;
@@ -82,7 +100,7 @@ input[type='file'] {
   background-color: #fff;
 }
 
-.input-content input {
+.input-content input:nth-child(2) {
   width: 100%;
   padding: 10px;
   border: 1px solid rgba(0,0,0,0.3);
@@ -133,18 +151,27 @@ input[type='file'] {
 	display: none;
 }
 
+#btn-novo,
 #btn-sair {
-	width: 20px;
-	height: 20px;
-	background-color:  #e22424;
 	position: absolute;
-	top: 5px;
-	right: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 4px;
-	transition: .5s;
+}
+
+#btn-novo:hover,
+#btn-sair:hover {
+	border-bottom: 2px solid #000;
+}
+
+#btn-novo {
+	top: 5px;
+	left: 5px;
+}
+
+#btn-sair {
+	top: 5px;
+	right: 5px;
 }
 
 .btn-content {

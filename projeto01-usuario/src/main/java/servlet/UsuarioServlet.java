@@ -196,7 +196,7 @@ public class UsuarioServlet extends HttpServlet {
 			switch (acao) {
 				case "listar": {
 					dispacher = request.getRequestDispatcher("listar.jsp");
-					request.setAttribute("usuarios", usuarioDAO.listar());
+					request.setAttribute("usuarios", usuarioDAO.listar(null));
 					break;
 				}
 				default:
