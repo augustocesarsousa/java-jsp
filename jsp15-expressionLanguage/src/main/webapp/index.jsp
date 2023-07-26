@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Getter Setter</title>
+<title>Expression Language</title>
 </head>
 <body>
 	<h1>Curso JSP - Expression Language</h1>
