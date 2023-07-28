@@ -23,13 +23,11 @@ public class FilterAutenticacao implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		String url = req.getServletPath();
+		String urlDestino = req.getServletPath();
+		request.setAttribute("urlDestino", req.getServletPath());
 		
-		System.out.println(session.getAttribute("usuario"));
-		System.out.println(url);
-		
-		if(session.getAttribute("usuario") == null && !url.equalsIgnoreCase("/pages/login")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp?url="+url);
+		if(session.getAttribute("usuario") == null && !urlDestino.equalsIgnoreCase("/pages/login")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}		

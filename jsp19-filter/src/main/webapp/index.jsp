@@ -7,12 +7,6 @@
 </head>
 <body>
 	<h1>Cusro JSP - Filter</h1>
-	<form action="pages/login" method="post">
-		<input type="text" id="login" name="login" placeholder="Login">
-		<input type="password" id="password" name="password" placeholder="Senha">
-		<input type="submit" value="Entrar" />
-		<% request.setAttribute("urlParam", request.getAttribute("url")); %>
-	</form>
-	<p id="mensagem"></p>
+	<a href="pages/login.jsp">Fazer login</a>
 </body>
 </html>

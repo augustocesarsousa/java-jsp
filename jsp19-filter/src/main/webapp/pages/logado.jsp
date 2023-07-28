@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Cusro JSP - Filter</h1>
-	<p>Usuário logado com sucesso</p>
-	<a href="logout">Logout</a>
+	<p><%= "Usuário logado com sucesso, bem vindo " + session.getAttribute("usuario") %></p>
+	<a href="login">Logout</a>
 </body>
 </html>
