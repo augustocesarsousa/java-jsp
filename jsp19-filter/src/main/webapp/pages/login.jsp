@@ -6,7 +6,7 @@
 <title>Filter</title>
 </head>
 <body>
-	<h1>Cusro JSP - Filter</h1>
+	<h1>Curso JSP - Filter</h1>
 	<form action="login" method="post">
 		<input type="text" id="login" name="login" placeholder="Login">
 		<input type="password" id="password" name="password" placeholder="Senha">

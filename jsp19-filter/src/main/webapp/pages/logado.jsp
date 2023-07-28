@@ -6,7 +6,7 @@
 <title>Filter</title>
 </head>
 <body>
-	<h1>Cusro JSP - Filter</h1>
+	<h1>Curso JSP - Filter</h1>
 	<p><%= "Usuário logado com sucesso, bem vindo " + session.getAttribute("usuario") %></p>
 	<a href="login">Logout</a>
 </body>

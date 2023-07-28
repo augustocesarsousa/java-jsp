@@ -7,7 +7,7 @@
 <title>Jquery Ajax</title>
 </head>
 <body>
-	<h1>Cusro JSP - JQuery e Ajax</h1>
+	<h1>Curso JSP - JQuery e Ajax</h1>
 	<div>
 		<input type="number" id="input-numero1" placeholder="Primeiro número">
 		<select id="operacao">

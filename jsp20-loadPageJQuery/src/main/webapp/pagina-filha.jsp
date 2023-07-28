@@ -3,10 +3,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Filter</title>
+<title>Load Page com JQuery</title>
 </head>
 <body>
-	<h1>Curso JSP - Filter</h1>
-	<a href="pages/login.jsp">Fazer login</a>
+	<h2>Página filha carregada com sucesso</h2>
 </body>
 </html>
