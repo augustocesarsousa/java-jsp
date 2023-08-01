@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Curso JSP - iReport</h1>
-	<a href="relatorio?tipoArquivoRelatorio=PDF">Relatório em PDF</a><br>
-	<a href="relatorio?tipoArquivoRelatorio=EXCEL">Relatório em EXCEL</a>
+	<a href="relatorio?tipoArquivoRelatorio=pdf">Relatório em PDF</a><br>
+	<a href="relatorio?tipoArquivoRelatorio=xls">Relatório em EXCEL</a>
 </body>
 </html>

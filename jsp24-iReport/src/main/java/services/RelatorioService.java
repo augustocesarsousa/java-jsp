@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 @SuppressWarnings("deprecation")
@@ -29,8 +30,8 @@ public class RelatorioService implements Serializable{
 	private File arquivoGerado = null;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public String createRelatorio(List<?> listDataBeanCollection, HashMap parametrosRelatorio,
-			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext) throws Exception {
+	public String createRelatorio(List<?> listDataBeanCollection, HashMap parametrosRelatorio, String nomeRelatorioJasper, 
+			String nomeRelatorioSaida, ServletContext servletContext, String tipoArquivoRelatorio) throws Exception {
 		
 		//Cria a lista de BeanCollectionDataSource que carrega os dados para o relatório
 		JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(listDataBeanCollection);
@@ -58,10 +59,13 @@ public class RelatorioService implements Serializable{
 		//Carrega o arquivo
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosRelatorio, jrBeanCollectionDataSource);
 		
-		exporter = new JRPdfExporter();
-		
-		//Caminho relatório exportado
-		caminhoArquivoRelatorio = caminhoRelatorio + separator + nomeRelatorioSaida + ".pdf";
+		if(tipoArquivoRelatorio.equalsIgnoreCase("pdf")) {
+			exporter = new JRPdfExporter();
+			caminhoArquivoRelatorio = caminhoRelatorio + separator + nomeRelatorioSaida + ".pdf";
+		} else if(tipoArquivoRelatorio.equalsIgnoreCase("xls")) {
+			exporter = new JRXlsExporter();
+			caminhoArquivoRelatorio = caminhoRelatorio + separator + nomeRelatorioSaida + ".xls";
+		}
 		
 		//Cria novo arquivo exportado
 		arquivoGerado = new File(caminhoArquivoRelatorio);

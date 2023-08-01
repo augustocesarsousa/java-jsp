@@ -20,7 +20,7 @@ public class UsuarioDAO {
 	public List<Usuario> getAll() {
 		List<Usuario> usuarios = new ArrayList<Usuario>();		
 		
-		String sql = "SELECT id, nome, sobrenome, email, telefone FROM usuario ORDER BY nome";
+		String sql = "SELECT id, nome, sobrenome, email, telefone FROM usuario ORDER BY id";
 		
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);

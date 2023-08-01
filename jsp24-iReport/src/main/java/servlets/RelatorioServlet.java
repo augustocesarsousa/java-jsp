@@ -36,7 +36,7 @@ public class RelatorioServlet extends HttpServlet {
 			ServletContext context = request.getServletContext();
 			
 			//Cria o arquivo
-			String arquivoURL = relatorioService.createRelatorio(usuarios, new HashMap(), "relatorio_usuarios", "relatorio_usuarios", context);	
+			String arquivoURL = relatorioService.createRelatorio(usuarios, new HashMap(), "relatorio_usuarios", "relatorio_usuarios", context, tipoArquivoRelatorio);	
 			File arquivo = new File(arquivoURL);
 			FileInputStream inputStream = new FileInputStream(arquivo);
 			
