@@ -16,6 +16,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
+@SuppressWarnings("deprecation")
 public class RelatorioService implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +28,7 @@ public class RelatorioService implements Serializable{
 	private JRExporter exporter = null;
 	private File arquivoGerado = null;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public String createRelatorio(List<?> listDataBeanCollection, HashMap parametrosRelatorio,
 			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext) throws Exception {
 		
@@ -36,9 +38,7 @@ public class RelatorioService implements Serializable{
 		//Informa o caminho físico até a pasta que contém os relatórios .jasper
 		String caminhoRelatorio = servletContext.getRealPath(PASTA_RELATORIOS);
 		File file = new File(caminhoRelatorio + separator + nomeRelatorioJasper + ".jasper");		
-		if(caminhoRelatorio == null 
-				|| (caminhoRelatorio != null && caminhoRelatorio.isEmpty()
-				|| !file.exists())) {
+		if(caminhoRelatorio == null || (caminhoRelatorio != null && caminhoRelatorio.isEmpty()) || !file.exists()) {
 			caminhoRelatorio = this.getClass().getResource(PASTA_RELATORIOS).getPath();
 			separator = "";
 		}
@@ -48,7 +48,6 @@ public class RelatorioService implements Serializable{
 		
 		//Caminho completo até o relatório
 		String caminhoArquivosJasper = caminhoRelatorio + separator + nomeRelatorioJasper + ".jasper";
-		
 		//Carrega o relatório
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(caminhoArquivosJasper);
 		
@@ -57,7 +56,7 @@ public class RelatorioService implements Serializable{
 		parametrosRelatorio.put("SUBREPORT_DIR", subPastaRelatorios);
 		
 		//Carrega o arquivo
-		JasperPrint jasperPrint = JasperFillManager.fillReport(nomeRelatorioJasper, parametrosRelatorio, jrBeanCollectionDataSource);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosRelatorio, jrBeanCollectionDataSource);
 		
 		exporter = new JRPdfExporter();
 		

@@ -3,9 +3,7 @@ package servlets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import factories.UsuarioFactory;
-import models.Usuario;
+import daos.UsuarioDAO;
+import entities.Usuario;
 import services.RelatorioService;
 
 @WebServlet("/relatorio")
@@ -25,21 +23,20 @@ public class RelatorioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private RelatorioService relatorioService = new RelatorioService();
-	private List<Usuario> usuarios = UsuarioFactory.getUsuarioList();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private List<Usuario> usuarios = usuarioDAO.getAll();
        
     public RelatorioServlet() {
     }
 
+	@SuppressWarnings({ "unused", "rawtypes" })
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		try {
 			String tipoArquivoRelatorio = request.getParameter("tipoArquivoRelatorio");
 			ServletContext context = request.getServletContext();
-//			List<List<?>> dados = new ArrayList<List<?>>();
-//			dados.add(usuarios);
 			
 			//Cria o arquivo
-			String arquivoURL = relatorioService.createRelatorio(usuarios, new HashMap(), 
-					"relatorio_usuarios", "relatorio_usuarios", context);	
+			String arquivoURL = relatorioService.createRelatorio(usuarios, new HashMap(), "relatorio_usuarios", "relatorio_usuarios", context);	
 			File arquivo = new File(arquivoURL);
 			FileInputStream inputStream = new FileInputStream(arquivo);
 			
@@ -73,7 +70,7 @@ public class RelatorioServlet extends HttpServlet {
 			inputStream.close();
 			outputStream.close();			
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}		
 	}
 
