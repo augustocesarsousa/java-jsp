@@ -21,24 +21,24 @@ public abstract class EventFactory {
         
 		events.append("[");
 		
+		event.put("start", "2023-08-01");
 		event.put("title", "All Day Event");
-		event.put("start", "2023-07-01");
 		gsonString = gson.toJson(event,gsonType);
 		events.append(gsonString);        
 		events.append(",");        
 		event.clear();
 		
+		event.put("end", "2023-08-10");
+		event.put("start", "2023-08-07");
 		event.put("title", "Long Event");
-		event.put("start", "2023-07-07");
-		event.put("end", "2023-07-10");
 		gsonString = gson.toJson(event,gsonType);
 		events.append(gsonString);          
 		events.append(",");         
 		event.clear();
 		
-		event.put("title", "Click for Github");
+		event.put("start", "2023-08-28");
 		event.put("url", "https://github.com/augustocesarsousa");
-		event.put("start", "2023-07-28");
+		event.put("title", "Click for Github");
 		gsonString = gson.toJson(event,gsonType);
 		events.append(gsonString);        
 		event.clear();

@@ -15,22 +15,20 @@
 
   document.addEventListener('DOMContentLoaded', function() {
 	$.get("calendar", function(response) {
-		let eventsData = response;
-		console.log(eventsData);
+		let eventsData = JSON.parse(response);
 		  
 	    var calendarEl = document.getElementById('calendar');
+
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	      	initialView: 'dayGridMonth',
-	      	navLinks: true,
-	    	editable: true,
-	    	eventLimit: true,
-	      	headerToolbar: {
-	          	left: 'prev,next today',
-	          	center: 'title',
-	          	right: 'dayGridMonth,timeGridWeek,timeGridDay'
-	        },
-	        events: [eventsData]
+	      initialView: 'dayGridMonth',
+	      headerToolbar: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	      },
+	      events: eventsData
 	    });
+
 	    calendar.render();
 	});
   });
